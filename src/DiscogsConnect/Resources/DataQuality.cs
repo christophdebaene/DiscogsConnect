@@ -7,6 +7,8 @@
         [EnumMember(Value="Needs Vote")]
         NeedsVote,
         [EnumMember(Value = "Correct")]
-        Correct
+        Correct,
+        [EnumMember(Value = "Complete and Correct")]
+        CompleteAndCorrect
     }
 }

@@ -1,7 +1,5 @@
 ﻿namespace DiscogsConnect
-{
-    using Newtonsoft.Json;
-
+{    
     public class Track
     {        
         public string Duration { get; set; }

@@ -1,7 +1,5 @@
 ﻿namespace DiscogsConnect
 {
-    using Newtonsoft.Json;
-
     public class Video
     {     
         public string Uri { get; set; }
