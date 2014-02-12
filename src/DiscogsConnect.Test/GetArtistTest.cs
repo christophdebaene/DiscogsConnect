@@ -1,6 +1,7 @@
 ﻿namespace DiscogsConnect.Test
 {
     using FluentAssertions;
+    using System.Linq;
     using Xunit;
     
     public class GetArtistTest
@@ -16,19 +17,18 @@
             
             // Assert
             response.Should().NotBeNull();
-            response.Id.Should().Be(45);
-            response.ResourceUrl.Should().Be("http://api.discogs.com/artists/45");
-
-            response.Profile.Should().NotBeNullOrEmpty();
+            response.Profile.Should().NotBeNullOrWhiteSpace();
             response.ReleasesUrl.Should().Be("http://api.discogs.com/artists/45/releases");
             response.Name.Should().Be("Aphex Twin");
             response.NameVariations.Should().NotBeEmpty();
-            response.Uri.Should().Be("http://www.discogs.com/artist/Aphex+Twin");
+            response.Uri.Should().Be("http://www.discogs.com/artist/45-Aphex-Twin");
             response.Urls.Should().NotBeEmpty();
             response.Images.Should().NotBeEmpty();
+            response.ResourceUrl.Should().Be("http://api.discogs.com/artists/45");
             response.Aliases.Should().NotBeEmpty();
-            //response.DataQuality.Should().Be(DataQuality.Correct);
-            response.Realname.Should().Be("Richard David James");
+            response.Id.Should().Be(45);
+            response.DataQuality.Should().Be(DataQuality.Correct);
+            response.Realname.Should().Be("Richard David James");                                                                                                                        
         }
 
         [Fact]
@@ -50,20 +50,17 @@
 
             response.Items.Should().NotBeEmpty();
             response.Items.Should().HaveCount(50);
-        }
 
-        [Fact]
-        public void GetArtistReleasesPaging()
-        {
-            // Arrange
-            var client = new DiscogsClient();
-
-            // Act
-            var response = client.GetArtistReleasesAsync(45).Result;
-
-            // Assert               
-            response.Should().NotBeNull();
-            response.Items.Should().NotBeEmpty();
+            var artistRelease = response.Items.SingleOrDefault(x => x.Id == 258478);
+            artistRelease.Should().NotBeNull();
+            artistRelease.Thumb.Should().NotBeNullOrWhiteSpace();
+            artistRelease.Artist.Should().Be("Aphex Twin");
+            artistRelease.MainRelease.Should().Be(63114);
+            artistRelease.Title.Should().Be("Analog Bubblebath Vol 2");
+            artistRelease.Role.Should().Be("Main");
+            artistRelease.Year.Should().Be(1991);
+            artistRelease.ResourceUrl.Should().Be("http://api.discogs.com/masters/258478");
+            artistRelease.Type.Should().Be(ResourceType.Master);                        
         }
     }
 }

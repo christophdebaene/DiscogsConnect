@@ -16,7 +16,7 @@
             var response = client.Search("Deadmau5");
 
             // Assert            
-            response.Items.Should().NotBeEmpty();
+            response.Items.Should().NotBeEmpty();            
         }
 
         [Fact]

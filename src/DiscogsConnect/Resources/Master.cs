@@ -44,6 +44,6 @@
         public string Format { get; set; }
         public string Label { get; set; }
         public string Released { get; set; }
-        public string CatNo { get; set; }
+        public string Catno { get; set; }
     }
 }

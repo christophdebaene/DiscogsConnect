@@ -30,7 +30,8 @@
     
     public class ArtistRelease : Resource
     {            
-        public string Thumb { get; set; }   
+        public string Thumb { get; set; }
+        public string Artist { get; set; }   
         public string Title { get; set; }                        
         public int MainRelease { get; set; }
         public string Role { get; set; }            
