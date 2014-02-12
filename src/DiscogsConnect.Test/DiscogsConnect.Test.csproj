@@ -55,14 +55,15 @@
     <Reference Include="System.Xml.Linq" />
     <Reference Include="xunit.abstractions, Version=2.0.0.0, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\xunit.abstractions.2.0.0-alpha-build2548\lib\net35\xunit.abstractions.dll</HintPath>
+      <HintPath>..\packages\xunit.abstractions.2.0.0-alpha-build2576\lib\net35\xunit.abstractions.dll</HintPath>
     </Reference>
-    <Reference Include="xunit2, Version=2.0.0.2548, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+    <Reference Include="xunit2, Version=2.0.0.2576, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\xunit.core.2.0.0-alpha-build2548\lib\net45\xunit2.dll</HintPath>
+      <HintPath>..\packages\xunit.core.2.0.0-alpha-build2576\lib\net45\xunit2.dll</HintPath>
     </Reference>
-    <Reference Include="xunit2.assert">
-      <HintPath>..\packages\xunit.assert.2.0.0-alpha-build2548\lib\net45\xunit2.assert.dll</HintPath>
+    <Reference Include="xunit2.assert, Version=2.0.0.2576, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\xunit.assert.2.0.0-alpha-build2576\lib\net45\xunit2.assert.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
