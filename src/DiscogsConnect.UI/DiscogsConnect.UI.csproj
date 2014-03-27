@@ -93,7 +93,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DiscogsConnect\DiscogsConnect.csproj">
-      <Project>{6F475AD9-E1B4-4AB1-8E82-B9F5A7608568}</Project>
+      <Project>{15940221-914d-4c2a-844c-e1c22b90528a}</Project>
       <Name>DiscogsConnect</Name>
     </ProjectReference>
   </ItemGroup>

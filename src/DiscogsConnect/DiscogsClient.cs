@@ -36,7 +36,8 @@
 #endif
 
             client.BaseAddress = new Uri(baseAddress);
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));            
+            client.DefaultRequestHeaders.Add("User-Agent", "DiscogsConnect/2.0");
         }
 
         Task<T> GetTypeAsync<T>(string uri)

@@ -3,7 +3,8 @@
     using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
     using System;
-
+    using System.Reflection;
+    
     // http://stackoverflow.com/questions/8030538/how-to-implement-custom-jsonconverter-in-json-net-to-deserialize-a-list-of-base
 
     internal class SearchResourceConverter : JsonConverter
@@ -23,12 +24,12 @@
                     return new ReleaseSearchResult();
             }
 
-            throw new ApplicationException(string.Format("The given result type {0} is not supported!", type));
+            throw new Exception(string.Format("The given result type {0} is not supported!", type));
         }
 
         public override bool CanConvert(Type objectType)
-        {
-            return typeof(SearchResult).IsAssignableFrom(objectType);
+        {                        
+            return typeof(SearchResult).GetTypeInfo().IsAssignableFrom(objectType.GetTypeInfo());
         }
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)

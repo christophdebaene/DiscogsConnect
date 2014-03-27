@@ -4,8 +4,9 @@
     using Newtonsoft.Json.Serialization;
     using System;
     using System.Collections.Generic;
+    using System.Reflection;
     using System.Text.RegularExpressions;
-    
+        
     // reference:
     // http://www.codeproject.com/Articles/108996/Splitting-Pascal-Camel-Case-with-RegEx-Enhancement
 
@@ -16,7 +17,7 @@
 
         protected override string ResolvePropertyName(string propertyName)
         {                        
-            var output = Regex.Replace(propertyName, REGEX_PATTERN, REGEX_REPLACEMENT, RegexOptions.Compiled);
+            var output = Regex.Replace(propertyName, REGEX_PATTERN, REGEX_REPLACEMENT);
             return output.ToLower();
         }
 
@@ -32,10 +33,10 @@
         {
             var jsonProperty = base.CreateProperty(member, memberSerialization);
 
-            if (typeof(PaginationResponse).IsAssignableFrom(member.DeclaringType) &&
+            if (typeof(PaginationResponse).GetTypeInfo().IsAssignableFrom(member.DeclaringType.GetTypeInfo()) &&
                 member.Name == "Items")
-            {
-                var resourceType = member.DeclaringType.GetGenericArguments()[0];
+            {                
+                var resourceType   = member.DeclaringType.GenericTypeArguments[0];
                 jsonProperty.PropertyName = mapping[resourceType];
             }
 
