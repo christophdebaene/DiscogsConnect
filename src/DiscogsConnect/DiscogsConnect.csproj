@@ -36,7 +36,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="DiscogsClient.cs" />
-    <Compile Include="DiscogsClientExtensions.cs" />
     <Compile Include="DiscogsException.cs" />
     <Compile Include="IDiscogsClient.cs" />
     <Compile Include="Internal\ApiUrls.cs" />
