@@ -39,6 +39,7 @@
     <Compile Include="DiscogsClientExtensions.cs" />
     <Compile Include="DiscogsException.cs" />
     <Compile Include="IDiscogsClient.cs" />
+    <Compile Include="Internal\ApiUrls.cs" />
     <Compile Include="Internal\DebugDelegatingHandler.cs" />
     <Compile Include="Internal\DiscogsContractResolver.cs" />
     <Compile Include="Internal\JsonUtils.cs" />
