@@ -13,7 +13,7 @@
             var client = new DiscogsClient();
 
             // Act
-            var response = client.GetLabel(1);
+            var response = client.GetLabel(1).Result;
             
             // Assert
             response.Should().NotBeNull();
@@ -48,7 +48,7 @@
             var client = new DiscogsClient();
 
             // Act
-            var response = client.GetLabelRelease(1);
+            var response = client.GetLabelRelease(1).Result;
 
             // Assert
             response.Should().NotBeNull();

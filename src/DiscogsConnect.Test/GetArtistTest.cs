@@ -13,7 +13,7 @@
             var client = new DiscogsClient();
             
             // Act
-            var response = client.GetArtist(45);
+            var response = client.GetArtist(45).Result;
             
             // Assert
             response.Should().NotBeNull();
@@ -38,7 +38,7 @@
             var client = new DiscogsClient();
 
             // Act
-            var response = client.GetArtistReleases(45);
+            var response = client.GetArtistReleases(45).Result;
             
             // Assert            
             response.Should().NotBeNull();

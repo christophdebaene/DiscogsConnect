@@ -15,7 +15,7 @@
         {            
             var client = new DiscogsClient();
 
-            var result = client.Search("Serious Beats 25", ResourceType.Release);
+            var result = client.Search("Serious Beats 25", ResourceType.Release).Result;
 
             var release = result.Items
                 .Where(x => x.Type == ResourceType.Release)

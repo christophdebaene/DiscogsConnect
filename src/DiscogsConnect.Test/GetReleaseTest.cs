@@ -12,7 +12,7 @@
             var client = new DiscogsClient();
 
             // Act
-            var response = client.GetRelease(1);
+            var response = client.GetRelease(1).Result;
             
             // Assert
             response.Status.Should().Be("Accepted");

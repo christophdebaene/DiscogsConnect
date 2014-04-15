@@ -13,7 +13,7 @@
             var client = new DiscogsClient();
 
             // Act
-            var response = client.GetMasterRelease(565);
+            var response = client.GetMasterRelease(565).Result;
             
             // Assert
             response.Should().NotBeNull();
@@ -42,7 +42,7 @@
             var client = new DiscogsClient();
 
             // Act
-            var response = client.GetMasterVersion(8471);
+            var response = client.GetMasterVersion(8471).Result;
 
             // Assert
             response.Should().NotBeNull();

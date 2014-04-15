@@ -53,52 +53,52 @@
                .Unwrap();
         }
              
-        public Task<Artist> GetArtistAsync(int artistId)
+        public Task<Artist> GetArtist(int artistId)
         {
             return GetTypeAsync<Artist>(ApiUrls.Artist(artistId));
         }
            
-        public Task<PaginationResponse<ArtistRelease>> GetArtistReleasesAsync(int artistId, int page = 1, int perPage = 50)
+        public Task<PaginationResponse<ArtistRelease>> GetArtistReleases(int artistId, int page = 1, int perPage = 50)
         {
             return GetTypeAsync<PaginationResponse<ArtistRelease>>(ApiUrls.ArtistRelease(artistId, page, perPage));
         }
         
-        public Task<Release> GetReleaseAsync(int releaseId)
+        public Task<Release> GetRelease(int releaseId)
         {            
             return GetTypeAsync<Release>(ApiUrls.Release(releaseId));                
         }
 
-        public Task<Master> GetMasterReleaseAsync(int masterReleaseId)
+        public Task<Master> GetMasterRelease(int masterReleaseId)
         {            
             return GetTypeAsync<Master>(ApiUrls.MasterRelease(masterReleaseId));                
         }
 
-        public Task<PaginationResponse<MasterVersion>> GetMasterVersionAsync(int masterReleaseId, int page = 1, int perPage = 50)
+        public Task<PaginationResponse<MasterVersion>> GetMasterVersion(int masterReleaseId, int page = 1, int perPage = 50)
         {
             return GetTypeAsync<PaginationResponse<MasterVersion>>(ApiUrls.MasterVersion(masterReleaseId, page, perPage));
         }
       
-        public Task<Label> GetLabelAsync(int labelId)
+        public Task<Label> GetLabel(int labelId)
         {
             return GetTypeAsync<Label>(ApiUrls.Label(labelId));               
         }
 
-        public Task<PaginationResponse<LabelRelease>> GetLabelReleaseAsync(int labelId, int page = 1, int perPage = 50)
+        public Task<PaginationResponse<LabelRelease>> GetLabelRelease(int labelId, int page = 1, int perPage = 50)
         {
             return GetTypeAsync<PaginationResponse<LabelRelease>>(ApiUrls.LabelRelease(labelId, page, perPage));
         }
 
-        public Task<byte[]> GetImageAsync(string filename)
+        public Task<byte[]> GetImage(string filename)
         {
             return GetTypeAsync<byte[]>(ApiUrls.Image(filename));
         }
 
-        public Task<PaginationResponse<SearchResult>> SearchAsync(string searchString)
+        public Task<PaginationResponse<SearchResult>> Search(string searchString)
         {
             return GetTypeAsync<PaginationResponse<SearchResult>>(ApiUrls.Search(searchString));
         }
 
-        public Task<PaginationResponse<SearchResult>> SearchAsync(string searchString, ResourceType searchType)
+        public Task<PaginationResponse<SearchResult>> Search(string searchString, ResourceType searchType)
         {
             return GetTypeAsync<PaginationResponse<SearchResult>>(ApiUrls.Search(searchString, searchType));
         }             

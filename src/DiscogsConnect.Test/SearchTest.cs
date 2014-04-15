@@ -13,7 +13,7 @@
             var client = new DiscogsClient();
 
             // Act
-            var response = client.Search("Deadmau5");
+            var response = client.Search("Deadmau5").Result;
 
             // Assert            
             response.Items.Should().NotBeEmpty();            
@@ -26,7 +26,7 @@
             var client = new DiscogsClient();
 
             // Act
-            var response = client.Search("Deadmau5", ResourceType.Release);
+            var response = client.Search("Deadmau5", ResourceType.Release).Result;
 
             // Assert
             response.Items.Should().NotBeEmpty();
