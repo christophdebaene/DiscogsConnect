@@ -10,7 +10,7 @@
         public void SearchValidMasterRelease_ExpectData()
         {
             // Arrange
-            var client = new DiscogsClient();
+            var client = DiscogsClientFactory.Create();
 
             // Act
             var response = client.GetMasterRelease(565).Result;
@@ -23,13 +23,13 @@
             response.Videos.Should().NotBeEmpty();
             response.Title.Should().Be("Selected Ambient Works 85-92");
             response.MainRelease.Should().Be(32662);
-            response.MainReleaseUrl.Should().Be("http://api.discogs.com/releases/32662");
+            response.MainReleaseUrl.Should().Be("https://api.discogs.com/releases/32662");
             response.Year.Should().Be(1992);
-            response.Uri.Should().Be("http://www.discogs.com/Aphex-Twin-Selected-Ambient-Works-85-92/master/565");
-            response.VersionsUrl.Should().Be("http://api.discogs.com/masters/565/versions");
+            response.Uri.Should().Be("https://www.discogs.com/Aphex-Twin-Selected-Ambient-Works-85-92/master/565");
+            response.VersionsUrl.Should().Be("https://api.discogs.com/masters/565/versions");
             response.Artists.Should().NotBeEmpty();                      
             response.Images.Should().NotBeEmpty();
-            response.ResourceUrl.Should().Be("http://api.discogs.com/masters/565");
+            response.ResourceUrl.Should().Be("https://api.discogs.com/masters/565");
             response.Tracks.Should().NotBeEmpty();                        
             response.Id.Should().Be(565);
             response.DataQuality.Should().Be(DataQuality.Correct);
@@ -39,7 +39,7 @@
         public void SearchValidMasterReleaseVersion_ExpectData()
         {
             // Arrange
-            var client = new DiscogsClient();
+            var client = DiscogsClientFactory.Create();
 
             // Act
             var response = client.GetMasterVersion(8471).Result;
@@ -66,7 +66,7 @@
             masterVersion.Label.Should().Be("Albert Productions");
             masterVersion.Released.Should().Be("1980-07-25");
             masterVersion.Catno.Should().Be("APLP 046");
-            masterVersion.ResourceUrl.Should().Be("http://api.discogs.com/releases/400591");
+            masterVersion.ResourceUrl.Should().Be("https://api.discogs.com/releases/400591");
         }
     }
 }

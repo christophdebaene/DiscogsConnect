@@ -10,7 +10,7 @@
         public void SearchByArtistType_ShouldOnlyContainArtistType()
         {
             // Arrange
-            var client = new DiscogsClient();
+            var client = DiscogsClientFactory.Create();
 
             // Act
             var response = client.Search("Deadmau5").Result;
@@ -23,7 +23,7 @@
         public void SearchByReleaseType_ShouldOnlyContainRelease()
         {
             // Arrange
-            var client = new DiscogsClient();
+            var client = DiscogsClientFactory.Create();
 
             // Act
             var response = client.Search("Deadmau5", ResourceType.Release).Result;

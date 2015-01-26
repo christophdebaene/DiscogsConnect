@@ -13,19 +13,19 @@
 
         private void button1_Click(object sender, EventArgs e)
         {            
-            var client = new DiscogsClient();
+            //var client = new DiscogsClient();
 
-            var result = client.Search("Serious Beats 25", ResourceType.Release).Result;
+            //var result = client.Search("Serious Beats 25", ResourceType.Release).Result;
 
-            var release = result.Items
-                .Where(x => x.Type == ResourceType.Release)
-                .Cast<ReleaseSearchResult>()
-                .Where(x => x.Formats.Contains("CD"))
-                .Where(x => x.Title.Contains("Serious Beats 25"))
-                .FirstOrDefault();
+            //var release = result.Items
+            //    .Where(x => x.Type == ResourceType.Release)
+            //    .Cast<ReleaseSearchResult>()
+            //    .Where(x => x.Formats.Contains("CD"))
+            //    .Where(x => x.Title.Contains("Serious Beats 25"))
+            //    .FirstOrDefault();
 
 
-            var releaseDetail = client.GetRelease(release.Id);
+            //var releaseDetail = client.GetRelease(release.Id);
 
 
 
