@@ -1,20 +1,25 @@
-﻿namespace DiscogsConnect.Test
-{
-    using FluentAssertions;
-    using System.Linq;
-    using Xunit;
+﻿using FluentAssertions;
+using System.Linq;
+using Xunit;
 
+namespace DiscogsConnect.Test
+{  
+    [Collection("DiscogsClient")]
     public class GetLabelTest
     {
+        protected IDiscogsClient Client { get; private set; }
+
+        public GetLabelTest(DiscogsClientFixture fixture)
+        {
+            Client = fixture.DiscogsClient;
+        }
+
         [Fact]
         public void GetValidLabel_ExpectData()
         {
-            // Arrange
-            var client = DiscogsClientFactory.Create();
-
             // Act
-            var response = client.GetLabel(1).Result;
-            
+            var response = Client.GetLabel(1).Result;
+
             // Assert
             response.Should().NotBeNull();
 
@@ -33,7 +38,7 @@
             sampleImage.Height.Should().BeGreaterThan(0);
             sampleImage.Width.Should().BeGreaterThan(0);
             sampleImage.ResourceUrl.Should().NotBeNullOrWhiteSpace();
-            sampleImage.Type.Should().NotBeNull();                                    
+            sampleImage.Type.Should().NotBeNull();
             sampleImage.Uri150.Should().NotBeNullOrEmpty();
 
             response.ResourceUrl.Should().Be("https://api.discogs.com/labels/1");
@@ -44,11 +49,8 @@
         [Fact]
         public void GetValidLabelRelease_ExpectData()
         {
-            // Arrange
-            var client = DiscogsClientFactory.Create();
-
             // Act
-            var response = client.GetLabelRelease(1).Result;
+            var response = Client.GetLabelRelease(1).Result;
 
             // Assert
             response.Should().NotBeNull();
@@ -70,7 +72,7 @@
             labelRelease.Title.Should().Be("DJ-Kicks");
             labelRelease.Catno.Should().Be("!K7071CD");
             labelRelease.ResourceUrl.Should().Be("https://api.discogs.com/releases/2801");
-            labelRelease.Artist.Should().Be("Andrea Parker");            
+            labelRelease.Artist.Should().Be("Andrea Parker");
         }
     }
 }

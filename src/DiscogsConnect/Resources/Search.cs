@@ -1,11 +1,11 @@
-﻿namespace DiscogsConnect
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using System.Collections.Generic;
+
+namespace DiscogsConnect
 {
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Converters;
-    using System.Collections.Generic;
-    
     public abstract class SearchResult : Resource
-    {            
+    {
         [JsonConverter(typeof(StringEnumConverter))]
         public ResourceType Type { get; set; }
 
@@ -15,24 +15,24 @@
     }
 
     public class ArtistSearchResult : SearchResult
-    {    
+    {
     }
 
     public class ReleaseSearchResult : SearchResult
     {
         [JsonProperty("style")]
-        public List<string> Styles { get; set; }            
+        public List<string> Styles { get; set; }
         [JsonProperty("format")]
         public List<string> Formats { get; set; }
         public string Country { get; set; }
         [JsonProperty("barcode")]
-        public List<string> Barcodes { get; set; }            
+        public List<string> Barcodes { get; set; }
         [JsonProperty("label")]
         public List<string> Labels { get; set; }
         public string Catno { get; set; }
         public int Year { get; set; }
         [JsonProperty("genre")]
-        public List<string> Genres { get; set; }            
+        public List<string> Genres { get; set; }
     }
 
     public class LabelSearchResult : SearchResult
@@ -45,12 +45,12 @@
         public List<string> Styles { get; set; }
         [JsonProperty("format")]
         public List<string> Formats { get; set; }
-        public string Country { get; set; }            
+        public string Country { get; set; }
         [JsonProperty("label")]
         public List<string> Labels { get; set; }
         public string Catno { get; set; }
         public int Year { get; set; }
         [JsonProperty("genre")]
         public List<string> Genres { get; set; }
-    }         
+    }
 }

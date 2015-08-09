@@ -1,13 +1,13 @@
-﻿namespace DiscogsConnect
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
+using System.Reflection;
+
+namespace DiscogsConnect.Serialization
 {
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Linq;
-    using System;
-    using System.Reflection;
-    
     // http://stackoverflow.com/questions/8030538/how-to-implement-custom-jsonconverter-in-json-net-to-deserialize-a-list-of-base
 
-    internal class SearchResourceConverter : JsonConverter
+    class SearchResourceConverter : JsonConverter
     {
         protected SearchResult Create(Type objectType, Newtonsoft.Json.Linq.JObject jObject)
         {
@@ -16,10 +16,13 @@
             {
                 case "artist":
                     return new ArtistSearchResult();
+
                 case "label":
                     return new LabelSearchResult();
+
                 case "master":
                     return new MasterSearchResult();
+
                 case "release":
                     return new ReleaseSearchResult();
             }
@@ -28,7 +31,7 @@
         }
 
         public override bool CanConvert(Type objectType)
-        {                        
+        {
             return typeof(SearchResult).GetTypeInfo().IsAssignableFrom(objectType.GetTypeInfo());
         }
 

@@ -1,37 +1,47 @@
-﻿namespace DiscogsConnect.Test
+﻿using FluentAssertions;
+using System.Linq;
+using Xunit;
+
+namespace DiscogsConnect.Test
 {
-    using FluentAssertions;
-    using System.Linq;
-    using Xunit;
-        
+    [Collection("DiscogsClient")]
     public class SearchTest
     {
-        [Fact]
-        public void SearchByArtistType_ShouldOnlyContainArtistType()
+        protected IDiscogsClient Client { get; private set; }
+    
+        public SearchTest(DiscogsClientFixture fixture)
         {
-            // Arrange
-            var client = DiscogsClientFactory.Create();
-
-            // Act
-            var response = client.Search("Deadmau5").Result;
-
-            // Assert            
-            response.Items.Should().NotBeEmpty();            
+            Client = fixture.DiscogsClient;
         }
 
         [Fact]
-        public void SearchByReleaseType_ShouldOnlyContainRelease()
+        public void SearchByReleaseType_ShouldOnlyContainReleaseType()
         {
-            // Arrange
-            var client = DiscogsClientFactory.Create();
-
             // Act
-            var response = client.Search("Deadmau5", ResourceType.Release).Result;
+
+            var criteria = new SearchCriteria
+            {
+                Type = ResourceType.Release,
+                Title = "Serious Beats 55"
+            };
+
+            var response = Client.Search(criteria).Result;
 
             // Assert
             response.Items.Should().NotBeEmpty();
-            response.Items.Where(
-                x => x.Type != ResourceType.Release).Should().BeEmpty();
-        }       
+            response.Items.Should().HaveCount(1);
+
+            var release = response.Items.Cast<ReleaseSearchResult>().First();
+
+            release.Should().NotBeNull();
+            release.Id.Should().Be(1017350);
+            release.ResourceUrl.Should().Be("https://api.discogs.com/releases/1017350");
+            release.Type.Should().Be(ResourceType.Release);
+            release.Title.Should().Be("Various - Serious Beats 55");
+            release.Year.Should().Be(2007);
+            release.Catno.Should().Be("541416 501825");
+            release.Genres.Should().ContainSingle("Electronic");
+            release.Styles.Should().ContainSingle("House");
+        }        
     }
 }

@@ -1,47 +1,62 @@
-﻿namespace DiscogsConnect
-{    
-    using System;
-    using System.Collections.Generic;
-    using System.Net.Http;
-    using System.Net.Http.Formatting;
-    using System.Net.Http.Headers;
-    using System.Threading.Tasks;
+﻿using DiscogsConnect.Http;
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Formatting;
+using System.Threading.Tasks;
 
+namespace DiscogsConnect
+{
     public class DiscogsClient : IDiscogsClient
     {
-        private const string BASE_URL = "https://api.discogs.com";
-        private readonly HttpClient client;
-                
-        static IEnumerable<MediaTypeFormatter> Formatters
+        readonly HttpClient _client;
+        public static readonly Uri DiscogsApiUrl = new Uri("https://api.discogs.com");
+
+        private static IEnumerable<MediaTypeFormatter> Formatters
         {
             get
             {
-                var formatter = new JsonMediaTypeFormatter();
-                formatter.SerializerSettings.Converters.Add(new SearchResourceConverter());
-                formatter.SerializerSettings.ContractResolver = new DiscogsContractResolver();                
-                yield return formatter;
+                yield return new JsonMediaTypeFormatter
+                {
+                    SerializerSettings = Serialization.DiscogsSerializerSettings.Default
+                };
             }
         }
-        
-        public DiscogsClient(DiscogsSettings settings)
+
+        public DiscogsClient(string userAgent)
         {
+            if (string.IsNullOrEmpty(userAgent))
+                throw new ArgumentNullException("userAgent");
 
-#if DEBUG
-            client = HttpClientFactory.Create(new DebugDelegatingHandler());            
-#else
-            client = new HttpClient();
-#endif
-
-            client.BaseAddress = new Uri(BASE_URL);
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            client.DefaultRequestHeaders.Add("User-Agent", settings.UserAgent);
-            client.DefaultRequestHeaders.Add("Authorization", 
-                string.Format("Discogs key={0}, secret={1}", settings.Key, settings.Secret));
+            var httpClientFactory = new Http.HttpClientFactory();
+            _client = httpClientFactory.Create(new HttpClientOptions
+            {
+                UserAgent = userAgent
+            });
         }
 
-        Task<T> GetTypeAsync<T>(Uri uri)
+        public DiscogsClient(string userAgent, string key, string secret)
+        {            
+            if (string.IsNullOrEmpty(userAgent))
+                throw new ArgumentNullException("userAgent");
+
+            if (string.IsNullOrEmpty(userAgent))
+                throw new ArgumentNullException("key");
+
+            if (string.IsNullOrEmpty(userAgent))
+                throw new ArgumentNullException("secret");
+
+            var httpClientFactory = new Http.HttpClientFactory();
+            _client = httpClientFactory.Create(new HttpClientOptions
+            {
+                UserAgent = userAgent,
+                Authentication = new HttpClientOptions.Credentials(key, secret)
+            });
+        }
+        
+        async Task<T> GetTypeAsync<T>(Uri uri)
         {
-            return client
+            return await _client
                .GetAsync(uri)
                .ContinueWith(x =>
                {
@@ -51,55 +66,50 @@
                })
                .Unwrap();
         }
-             
-        public Task<Artist> GetArtist(int artistId)
+
+        public async Task<Artist> GetArtist(int artistId)
         {
-            return GetTypeAsync<Artist>(ApiUrls.Artist(artistId));
-        }
-           
-        public Task<PaginationResponse<ArtistRelease>> GetArtistReleases(int artistId, int page = 1, int perPage = 50)
-        {
-            return GetTypeAsync<PaginationResponse<ArtistRelease>>(ApiUrls.ArtistReleases(artistId, page, perPage));
-        }
-        
-        public Task<Release> GetRelease(int releaseId)
-        {            
-            return GetTypeAsync<Release>(ApiUrls.Release(releaseId));                
+            return await GetTypeAsync<Artist>(ApiUrls.Artist(artistId));
         }
 
-        public Task<Master> GetMasterRelease(int masterReleaseId)
-        {            
-            return GetTypeAsync<Master>(ApiUrls.MasterRelease(masterReleaseId));                
+        public async Task<PaginationResponse<ArtistRelease>> GetArtistReleases(int artistId, int page = 1, int perPage = 50)
+        {
+            return await GetTypeAsync<PaginationResponse<ArtistRelease>>(ApiUrls.ArtistReleases(artistId, page, perPage));
         }
 
-        public Task<PaginationResponse<MasterVersion>> GetMasterVersion(int masterReleaseId, int page = 1, int perPage = 50)
+        public async Task<Release> GetRelease(int releaseId)
         {
-            return GetTypeAsync<PaginationResponse<MasterVersion>>(ApiUrls.MasterReleaseVersions(masterReleaseId, page, perPage));
-        }
-      
-        public Task<Label> GetLabel(int labelId)
-        {
-            return GetTypeAsync<Label>(ApiUrls.Label(labelId));               
+            return await GetTypeAsync<Release>(ApiUrls.Release(releaseId));
         }
 
-        public Task<PaginationResponse<LabelRelease>> GetLabelRelease(int labelId, int page = 1, int perPage = 50)
+        public async Task<Master> GetMasterRelease(int masterReleaseId)
         {
-            return GetTypeAsync<PaginationResponse<LabelRelease>>(ApiUrls.LabelReleases(labelId, page, perPage));
+            return await GetTypeAsync<Master>(ApiUrls.MasterRelease(masterReleaseId));
         }
 
-        public Task<byte[]> GetImage(string filename)
+        public async Task<PaginationResponse<MasterVersion>> GetMasterVersion(int masterReleaseId, int page = 1, int perPage = 50)
         {
-            return GetTypeAsync<byte[]>(ApiUrls.Image(filename));
+            return await GetTypeAsync<PaginationResponse<MasterVersion>>(ApiUrls.MasterReleaseVersions(masterReleaseId, page, perPage));
         }
 
-        public Task<PaginationResponse<SearchResult>> Search(string searchString)
+        public async Task<Label> GetLabel(int labelId)
         {
-            return GetTypeAsync<PaginationResponse<SearchResult>>(ApiUrls.Search(searchString));
+            return await GetTypeAsync<Label>(ApiUrls.Label(labelId));
         }
 
-        public Task<PaginationResponse<SearchResult>> Search(string searchString, ResourceType searchType)
+        public async Task<PaginationResponse<LabelRelease>> GetLabelRelease(int labelId, int page = 1, int perPage = 50)
         {
-            return GetTypeAsync<PaginationResponse<SearchResult>>(ApiUrls.Search(searchString, searchType));
-        }             
-    }   
+            return await GetTypeAsync<PaginationResponse<LabelRelease>>(ApiUrls.LabelReleases(labelId, page, perPage));
+        }
+
+        public async Task<byte[]> GetImage(string uri)
+        {
+            return await _client.GetByteArrayAsync(uri);
+        }
+
+        public async Task<PaginationResponse<SearchResult>> Search(SearchCriteria criteria)
+        {
+            return await GetTypeAsync<PaginationResponse<SearchResult>>(ApiUrls.Search(criteria));
+        }
+    }
 }

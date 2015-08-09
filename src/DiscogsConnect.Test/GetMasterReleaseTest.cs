@@ -1,20 +1,25 @@
-﻿namespace DiscogsConnect.Test
-{
-    using FluentAssertions;
-    using System.Linq;
-    using Xunit;
-    
+﻿using FluentAssertions;
+using System.Linq;
+using Xunit;
+
+namespace DiscogsConnect.Test
+{   
+    [Collection("DiscogsClient")]
     public class GetMasterReleaseTest
     {
+        protected IDiscogsClient Client { get; private set; }
+
+        public GetMasterReleaseTest(DiscogsClientFixture fixture)
+        {
+            Client = fixture.DiscogsClient;
+        }
+
         [Fact]
         public void SearchValidMasterRelease_ExpectData()
         {
-            // Arrange
-            var client = DiscogsClientFactory.Create();
-
             // Act
-            var response = client.GetMasterRelease(565).Result;
-            
+            var response = Client.GetMasterRelease(565).Result;
+
             // Assert
             response.Should().NotBeNull();
 
@@ -27,10 +32,10 @@
             response.Year.Should().Be(1992);
             response.Uri.Should().Be("https://www.discogs.com/Aphex-Twin-Selected-Ambient-Works-85-92/master/565");
             response.VersionsUrl.Should().Be("https://api.discogs.com/masters/565/versions");
-            response.Artists.Should().NotBeEmpty();                      
+            response.Artists.Should().NotBeEmpty();
             response.Images.Should().NotBeEmpty();
             response.ResourceUrl.Should().Be("https://api.discogs.com/masters/565");
-            response.Tracks.Should().NotBeEmpty();                        
+            response.Tracks.Should().NotBeEmpty();
             response.Id.Should().Be(565);
             response.DataQuality.Should().Be(DataQuality.Correct);
         }
@@ -38,11 +43,8 @@
         [Fact]
         public void SearchValidMasterReleaseVersion_ExpectData()
         {
-            // Arrange
-            var client = DiscogsClientFactory.Create();
-
             // Act
-            var response = client.GetMasterVersion(8471).Result;
+            var response = Client.GetMasterVersion(8471).Result;
 
             // Assert
             response.Should().NotBeNull();

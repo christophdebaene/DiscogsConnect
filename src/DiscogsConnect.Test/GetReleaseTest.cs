@@ -1,44 +1,49 @@
-﻿namespace DiscogsConnect.Test
-{    
-    using FluentAssertions;
-    using Xunit;
+﻿using FluentAssertions;
+using Xunit;
 
+namespace DiscogsConnect.Test
+{
+    [Collection("DiscogsClient")]
     public class GetReleaseTest
-    {       
+    {
+        protected IDiscogsClient Client { get; private set; }
+
+        public GetReleaseTest(DiscogsClientFixture fixture)
+        {
+            Client = fixture.DiscogsClient;
+        }
+
         [Fact]
         public void SearchValidRelease_ExpectData()
-        {             
-            // Arrange
-            var client = DiscogsClientFactory.Create();
-
+        {
             // Act
-            var response = client.GetRelease(1).Result;
-            
+            var response = Client.GetRelease(1017350).Result;
+
             // Assert
+
+            response.Id.Should().Be(1017350);
+            response.ResourceUrl.Should().Be("https://api.discogs.com/releases/1017350");
+            response.Uri.Should().Be("https://www.discogs.com/Various-Serious-Beats-55/release/1017350");
             response.Status.Should().Be("Accepted");
-            response.Styles.Should().NotBeEmpty();
-            response.ReleasedFormatted.Should().Be("Mar 1999");
+            response.DataQuality.Should().Be(DataQuality.NeedsVote);
+            response.Styles.Should().ContainSingle("House");
+            response.ReleasedFormatted.Should().Be("25 Jun 2007");
             response.Labels.Should().NotBeEmpty();
-            response.Released.Should().Be("1999-03-00");
-            response.MasterUrl.Should().Be("https://api.discogs.com/masters/5427");
-            response.Year.Should().Be(1999);
+            response.Released.Should().Be("2007-06-25");
+            response.Formats.Should().NotBeEmpty();
+            response.FormatQuantity.Should().Be(3);
+            response.Year.Should().Be(2007);
             response.Images.Should().NotBeEmpty();
-            response.Id.Should().Be(1);
-            response.Genres.Should().NotBeEmpty();
+            response.Genres.Should().ContainSingle("Electronic");
             response.Thumb.Should().NotBeNullOrWhiteSpace();
             response.ExtraArtists.Should().NotBeEmpty();
-            response.Title.Should().Be("Stockholm");
-            response.Country.Should().Be("Sweden");
+            response.Title.Should().Be("Serious Beats 55");
+            response.Country.Should().Be("Belgium");
             response.Notes.Should().NotBeNullOrWhiteSpace();
             response.Identifiers.Should().NotBeEmpty();
             response.Companies.Should().NotBeEmpty();
-            response.Uri.Should().Be("https://www.discogs.com/Persuader-Stockholm/release/1");
             response.Artists.Should().NotBeEmpty();
-            response.Formats.Should().NotBeEmpty();
-            response.ResourceUrl.Should().Be("https://api.discogs.com/releases/1");
-            response.MasterId.Should().Be(5427);
             response.Tracks.Should().NotBeEmpty();
-            response.DataQuality.Should().Be(DataQuality.CompleteAndCorrect);
         }
     }
 }
