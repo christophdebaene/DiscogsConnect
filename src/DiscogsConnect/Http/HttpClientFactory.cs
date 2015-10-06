@@ -28,8 +28,8 @@ namespace DiscogsConnect.Http
 
         protected virtual IEnumerable<DelegatingHandler> CreateHandlers(HttpClientOptions options)
         {
-            //return Enumerable.Empty<DelegatingHandler>();
-            yield return new DebugDelegatingHandler();
+            return Enumerable.Empty<DelegatingHandler>();
+            //yield return new DebugDelegatingHandler();
         }
     }
 }
