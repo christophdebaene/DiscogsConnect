@@ -1,15 +1,14 @@
 ﻿using Newtonsoft.Json;
 
-namespace DiscogsConnect.Serialization
+namespace DiscogsConnect
 {
-    public class DiscogsSerializerSettings : JsonSerializerSettings
+    internal class DiscogsSerializerSettings : JsonSerializerSettings
     {
         public static JsonSerializerSettings Default = new DiscogsSerializerSettings();
-
         public DiscogsSerializerSettings()
         {
-            this.Converters.Add(new SearchResourceConverter());
-            this.ContractResolver = new DiscogsContractResolver();
+            Converters.Add(new SearchResourceConverter());
+            ContractResolver = new DiscogsContractResolver();
         }
     }
 }

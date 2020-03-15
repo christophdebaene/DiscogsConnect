@@ -11,6 +11,12 @@ namespace DiscogsConnect
         Correct,
 
         [EnumMember(Value = "Complete and Correct")]
-        CompleteAndCorrect
+        CompleteAndCorrect,
+
+        [EnumMember(Value = "Needs Minor Changes")]
+        NeedsMinorChanges,
+
+        [EnumMember(Value = "Needs Major Changes")]
+        NeedsMajorChanges
     }
 }

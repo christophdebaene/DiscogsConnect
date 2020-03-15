@@ -29,18 +29,18 @@ namespace DiscogsConnect
         public string Submitter { get; set; }
         public string Contributor { get; set; }
 
-        internal string BuildQueryString()
-        {
-            var jsonSerializer = JsonSerializer.CreateDefault(Serialization.DiscogsSerializerSettings.Default);
-            var jObject = JObject.FromObject(this, jsonSerializer);
+        //internal string BuildQueryString()
+        //{
+        //    var jsonSerializer = JsonSerializer.CreateDefault(Serialization.DiscogsSerializerSettings.Default);
+        //    var jObject = JObject.FromObject(this, jsonSerializer);
 
-            var query = string.Join("&", jObject
-                .Children()
-                .Cast<JProperty>()
-                .Where(x => !string.IsNullOrEmpty(x.Value.ToString()))
-                .Select(x => string.Format("{0}={1}", x.Name, x.Value.ToString())));
+        //    var query = string.Join("&", jObject
+        //        .Children()
+        //        .Cast<JProperty>()
+        //        .Where(x => !string.IsNullOrEmpty(x.Value.ToString()))
+        //        .Select(x => string.Format("{0}={1}", x.Name, x.Value.ToString())));
 
-            return query;
-        }
+        //    return query;
+        //}
     }
 }

@@ -39,6 +39,7 @@ namespace DiscogsConnect
         public List<Identifier> Identifiers { get; set; }
 
         public string Thumb { get; set; }
+        public int MasterId { get; set; }
 
         public class Label : Resource
         {
@@ -46,6 +47,7 @@ namespace DiscogsConnect
             public int EntityType { get; set; }
             public string Catno { get; set; }
             public string EntityTypeName { get; set; }
+            public string ThumbnailUrl { get; set; }
         }
 
         public class Artist : Resource
@@ -55,8 +57,8 @@ namespace DiscogsConnect
             public string Anv { get; set; }
             public string Join { get; set; }
             public string Name { get; set; }
+            public string ThumbnailUrl { get; set; }
         }
-
         public class Company : Resource
         {
             public string EntityType { get; set; }

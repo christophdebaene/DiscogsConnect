@@ -1,18 +1,19 @@
-﻿using Xunit;
+using Xunit;
 
 namespace DiscogsConnect.Test
 {
     public class DiscogsClientFixture
     {
         const string UserAgent = "DiscogsConnect/2.0";
-        const string Key = "<fill in>";
-        const string Secret = "<fill in>";
-        
-        public IDiscogsClient DiscogsClient { get; private set; }
-
+        const string Token = "<fill in>";
+        public IDiscogsClient DiscogsClient { get; }
         public DiscogsClientFixture()
         {
-            DiscogsClient = new DiscogsClient(UserAgent, Key, Secret);            
+            DiscogsClient = new DiscogsClient(new DiscogsOptions
+            {
+                UserAgent = UserAgent,
+                Token = Token
+            });
         }
     }
 
