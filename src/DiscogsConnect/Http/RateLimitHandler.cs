@@ -8,7 +8,7 @@ namespace DiscogsConnect.Http
     public class RateLimitHandler : HttpClientHandler
     {
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
-        {            
+        {
             var response = await base.SendAsync(request, cancellationToken);
             var rateLimit = RateLimit.Parse(response);
 
@@ -16,7 +16,7 @@ namespace DiscogsConnect.Http
 
             if (rateLimit.Remaining < 2)
                 Thread.Sleep(TimeSpan.FromSeconds(90));
-            
+
             return response;
         }
     }

@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 using System.Collections.Generic;
 
 namespace DiscogsConnect
@@ -14,10 +13,7 @@ namespace DiscogsConnect
         public int Year { get; set; }
         public List<string> Styles { get; set; }
         public List<string> Genres { get; set; }
-
-        [JsonConverter(typeof(StringEnumConverter))]
         public DataQuality DataQuality { get; set; }
-
         public List<Video> Videos { get; set; }
         public List<Artist> Artists { get; set; }
         public List<Image> Images { get; set; }

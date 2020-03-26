@@ -1,7 +1,4 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-
-namespace DiscogsConnect
+﻿namespace DiscogsConnect
 {
     public class Image
     {
@@ -9,16 +6,7 @@ namespace DiscogsConnect
         public int Height { get; set; }
         public string Uri { get; set; }
         public string Uri150 { get; set; }
-
-        [JsonConverter(typeof(StringEnumConverter))]
         public ImageType Type { get; set; }
-
         public string ResourceUrl { get; set; }
-    }
-
-    public enum ImageType
-    {
-        Primary,
-        Secondary
     }
 }

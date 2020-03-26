@@ -5,5 +5,6 @@
         IDatabaseClient Database { get; }
         IImageClient Image { get; }
         IUserCollectionClient UserCollection { get; }
-    }   
+        IUserWantlistClient UserWantlist { get; }
+    }
 }

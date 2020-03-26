@@ -11,8 +11,11 @@ namespace DiscogsConnect.Clients
     public class DatabaseClientTests
     {
         protected IDiscogsClient Client { get; }
+
         public DatabaseClientTests(DiscogsClientFixture fixture)
-         =>    Client = fixture.DiscogsClient;
+        {
+            Client = fixture.DiscogsClient;
+        }
 
         [Fact]
         public async Task GetArtistAsync()
@@ -20,7 +23,7 @@ namespace DiscogsConnect.Clients
             var artistId = 45; // Aphex Twin
 
             var response = await Client.Database.GetArtistAsync(artistId);
-         
+
             response.Should().NotBeNull();
             response.Id.Should().Be(45);
             response.Uri.Should().Be("https://www.discogs.com/artist/45-Aphex-Twin");
@@ -32,7 +35,7 @@ namespace DiscogsConnect.Clients
             response.Profile.Should().Contain("18 August 1971");
             response.Urls.Should().NotBeEmpty();
             response.Images.Should().NotBeEmpty();
-            response.Aliases.Should().NotBeEmpty();            
+            response.Aliases.Should().NotBeEmpty();
         }
 
         [Fact]
@@ -43,14 +46,14 @@ namespace DiscogsConnect.Clients
             var pageSize = 50;
 
             var response = await Client.Database.GetArtistReleasesAsync(artistId, page, pageSize);
-            
+
             response.Should().NotBeNull();
 
             response.Pagination.PerPage.Should().Be(pageSize);
             response.Pagination.Items.Should().BeGreaterThan(500);
             response.Pagination.Page.Should().Be(page);
             response.Pagination.Pages.Should().BeGreaterThan(10);
-            
+
             response.Items.Should().NotBeEmpty();
             response.Items.Should().HaveCount(pageSize);
         }
@@ -59,7 +62,7 @@ namespace DiscogsConnect.Clients
         public async Task GetMasterReleaseAsync()
         {
             // https://www.discogs.com/Emmanuel-Top-This-Is-A-Acid-Phase/master/36961
-            var masterId = 36961; 
+            var masterId = 36961;
 
             var response = await Client.Database.GetMasterReleaseAsync(masterId);
 
@@ -71,7 +74,7 @@ namespace DiscogsConnect.Clients
             response.MainRelease.Should().Be(8310);
             response.MainReleaseUrl.Should().Be("https://api.discogs.com/releases/8310");
             response.Genres.Should().Contain("Electronic");
-            response.Styles.Should().Contain("Techno", "Acid");            
+            response.Styles.Should().Contain("Techno", "Acid");
 
             response.Artists.Should().HaveCount(1);
             response.Artists.First().Id.Should().Be(1240);
@@ -89,7 +92,7 @@ namespace DiscogsConnect.Clients
                 {
                     new Track { Position = "A", Duration = "5:20", Type = "track", Title = "This Is A...?" },
                     new Track { Position = "B", Duration = "5:15", Type = "track", Title = "Acid Phase" },
-                });           
+                });
         }
 
         [Fact]
@@ -113,13 +116,13 @@ namespace DiscogsConnect.Clients
             response.Styles.Should().Contain("Techno", "Acid");
             response.Released.Should().Be("1994-11-10");
             response.ReleasedFormatted.Should().Be("10 Nov 1994");
-            response.Status.Should().Be("Accepted");            
+            response.Status.Should().Be("Accepted");
             response.Videos.Should().NotBeEmpty();
             response.Images.Should().NotBeEmpty();
             response.Companies.Should().NotBeEmpty();
 
             // Artists
-            
+
             response.Artists.Should().BeEquivalentTo(
                 new List<Release.Artist>
                 {
@@ -160,7 +163,39 @@ namespace DiscogsConnect.Clients
                         EntityTypeName = "Label",
                         ThumbnailUrl = "https://img.discogs.com/PEbheE7-Ce6UjpQgKZjvOII6Wac=/fit-in/183x108/filters:strip_icc():format(jpeg):mode_rgb():quality(40)/discogs-images/L-285-1099220313.jpg.jpg"
                     }
-                });                                          
+                });
+        }
+
+        [Fact]
+        public async Task SearchAsync()
+        {
+            var criteria = new SearchCriteria
+            {
+                Type = ResourceType.Release,
+                Title = "Serious Beats 55"
+            };
+
+            var response = await Client.Database.SearchAsync(criteria);
+
+            response.Should().NotBeNull();
+
+            response.Items.Should().NotBeEmpty();
+            response.Items.Should().HaveCount(1);
+
+            var release = response.Items.Cast<ReleaseSearchResult>().First();
+
+            release.Id.Should().Be(1017350);
+            release.Uri.Should().Be("/Various-Serious-Beats-55/release/1017350");
+            release.ResourceUrl.Should().Be("https://api.discogs.com/releases/1017350");
+            release.Type.Should().Be(ResourceType.Release);
+            release.Country.Should().Be("Belgium");
+            release.Title.Should().Be("Various - Serious Beats 55");
+            release.Year.Should().Be(2007);
+            release.Catno.Should().Be("541416 501825");
+            release.Genres.Should().ContainSingle("Electronic");
+            release.Styles.Should().ContainSingle("House");
+            release.Formats.Should().Contain("CD", "Compilation");
+            release.Barcodes.Should().Contain("SABAM", "NEWS541416501825");
         }
     }
 }

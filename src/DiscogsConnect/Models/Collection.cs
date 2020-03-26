@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace DiscogsConnect
 {
     public class Folder : Resource
-    {        
+    {
         public string Count { get; set; }
         public string Name { get; set; }
 
@@ -39,13 +39,6 @@ namespace DiscogsConnect
         public bool Public { get; set; }
     }
 
-    /*
-    public class CollectionItemPaginationResponse : PaginationResponse<CollectionItem>
-    {
-        public List<CollectionItem> Releases { get; set; }
-    }
-    */
-
     public class CollectionValue
     {
         public string Maximum { get; set; }
@@ -54,12 +47,12 @@ namespace DiscogsConnect
     }
 
     public class CollectionItem
-    {        
+    {
         public int Id { get; set; }
         public int InstanceId { get; set; }
         public DateTime DateAdded { get; set; }
         public int FolderId { get; set; }
-        
+
         public Information BasicInformation { get; set; }
 
         public class Information : Resource
@@ -71,7 +64,7 @@ namespace DiscogsConnect
 
             public List<Release.Label> Labels { get; set; }
             public List<Release.Format> Formats { get; set; }
-            public List<Release.Artist> Artists { get; set; }            
-        }        
+            public List<Release.Artist> Artists { get; set; }
+        }
     }
 }

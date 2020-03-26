@@ -5,7 +5,12 @@ VisualStudioVersion = 16.0.29905.134
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiscogsConnect", "src\DiscogsConnect\DiscogsConnect.csproj", "{F9175F7F-10AF-45C0-BA4B-6EC7DEEFA2B5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiscogsConnect.Test", "src\DiscogsConnect.Test\DiscogsConnect.Test.csproj", "{3B5AB2CD-1639-4A3A-8640-39FA6EE8538C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiscogsConnect.Test", "src\DiscogsConnect.Test\DiscogsConnect.Test.csproj", "{3B5AB2CD-1639-4A3A-8640-39FA6EE8538C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F898E00B-D8B7-4471-A644-5D689CBBBE15}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

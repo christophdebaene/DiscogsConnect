@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace DiscogsConnect
@@ -8,10 +8,7 @@ namespace DiscogsConnect
     public class SearchCriteria
     {
         public string Query { get; set; }
-
-        [JsonConverter(typeof(StringEnumConverter))]
         public ResourceType Type { get; set; }
-
         public string Title { get; set; }
         public string ReleaseTitle { get; set; }
         public string Credit { get; set; }
@@ -29,18 +26,13 @@ namespace DiscogsConnect
         public string Submitter { get; set; }
         public string Contributor { get; set; }
 
-        //internal string BuildQueryString()
-        //{
-        //    var jsonSerializer = JsonSerializer.CreateDefault(Serialization.DiscogsSerializerSettings.Default);
-        //    var jObject = JObject.FromObject(this, jsonSerializer);
-
-        //    var query = string.Join("&", jObject
-        //        .Children()
-        //        .Cast<JProperty>()
-        //        .Where(x => !string.IsNullOrEmpty(x.Value.ToString()))
-        //        .Select(x => string.Format("{0}={1}", x.Name, x.Value.ToString())));
-
-        //    return query;
-        //}
+        internal IEnumerable<(string Name, string Value)> Parameters()
+        {
+            var jsonSerializer = JsonSerializer.CreateDefault(DiscogsSerializerSettings.Default);
+            return JObject.FromObject(this, jsonSerializer)
+                .Properties()
+                .Where(x => !string.IsNullOrEmpty(x.Value.ToString()))
+                .Select(x => (x.Name, x.Value.ToString()));
+        }
     }
 }

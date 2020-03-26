@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 using System.Collections.Generic;
 
 namespace DiscogsConnect
@@ -9,17 +8,14 @@ namespace DiscogsConnect
         public string Title { get; set; }
         public string Uri { get; set; }
         public string Status { get; set; }
-
-        [JsonConverter(typeof(StringEnumConverter))]
         public DataQuality DataQuality { get; set; }
-
         public string Country { get; set; }
         public int Year { get; set; }
         public string Released { get; set; }
         public string ReleasedFormatted { get; set; }
         public string Notes { get; set; }
         public int FormatQuantity { get; set; }
-
+        public Community Community { get; set; }
         public List<string> Styles { get; set; }
         public List<string> Genres { get; set; }
         public List<Label> Labels { get; set; }
@@ -37,9 +33,11 @@ namespace DiscogsConnect
         public List<Track> Tracks { get; set; }
 
         public List<Identifier> Identifiers { get; set; }
-
+        public int NumForSale { get; set; }
+        public float LowestPrice { get; set; }
         public string Thumb { get; set; }
         public int MasterId { get; set; }
+        public int EstimatedWeight { get; set; }
 
         public class Label : Resource
         {
@@ -59,6 +57,7 @@ namespace DiscogsConnect
             public string Name { get; set; }
             public string ThumbnailUrl { get; set; }
         }
+
         public class Company : Resource
         {
             public string EntityType { get; set; }
@@ -80,29 +79,5 @@ namespace DiscogsConnect
             public string Name { get; set; }
             public string Qty { get; set; }
         }
-    }
-
-    public static class FormatType
-    {
-        public const string Vinyl = "Vinyl";
-        public const string CD = "CD";
-        public const string CDr = "CDr";
-        public const string DVD = "DVD";
-        public const string BluRay = "Blu-ray";
-        public const string SACD = "SACD";
-        public const string DAT = "DAT";
-        public const string Laserdisc = "Laserdisc";
-    }
-
-    public static class FormatDescriptionType
-    {
-        public const string LP = "LP";
-        public const string FLAC = "FLAC";
-        public const string WAV = "WAV";
-        public const string Album = "Album";
-        public const string MaxiSingle = "Maxi-Single";
-        public const string Single = "Single";
-        public const string Compilation = "Compilation";
-        public const string Mixed = "Mixed";
     }
 }

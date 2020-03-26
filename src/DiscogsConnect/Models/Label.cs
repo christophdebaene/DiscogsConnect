@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace DiscogsConnect
 {
@@ -10,10 +8,7 @@ namespace DiscogsConnect
         public string Profile { get; set; }
         public string ReleasesUrl { get; set; }
         public string Uri { get; set; }
-
-        [JsonConverter(typeof(StringEnumConverter))]
         public DataQuality DataQuality { get; set; }
-
         public string ContactInfo { get; set; }
         public List<Sublabel> Sublabels { get; set; }
         public List<string> Urls { get; set; }
