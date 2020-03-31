@@ -9,7 +9,6 @@ namespace DiscogsConnect.Clients
     public class ImageClientTests
     {
         protected IDiscogsClient Client { get; }
-
         public ImageClientTests(DiscogsClientFixture fixture)
         {
             Client = fixture.DiscogsClient;
@@ -18,7 +17,7 @@ namespace DiscogsConnect.Clients
         [Fact]
         public async Task GetImageAsync()
         {
-            var imageUrl = "https://api-img.discogs.com/LqbmoS-I4oG4VfG8i_yHryqKVUM=/fit-in/599x526/filters:strip_icc():format(jpeg):mode_rgb():quality(96)/discogs-images/R-1017350-1269167729.jpeg.jpg";
+            var imageUrl = "https://img.discogs.com/P8O9BmDeLn0cGSmGUyvd3ThO4l0=/600x848/smart/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/A-45-1414874002-9310.jpeg.jpg";
 
             var response = await Client.Image.GetImageAsync(imageUrl);
             response.Should().NotBeNullOrEmpty();

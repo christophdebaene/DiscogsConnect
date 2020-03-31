@@ -123,21 +123,12 @@ namespace DiscogsConnect.Clients
 
             // Artists
 
-            response.Artists.Should().BeEquivalentTo(
-                new List<Release.Artist>
-                {
-                    new Release.Artist
-                    {
-                        Id = 1240,
-                        ResourceUrl = "https://api.discogs.com/artists/1240",
-                        Name = "Emmanuel Top",
-                        Anv = string.Empty,
-                        Join = string.Empty,
-                        Role = string.Empty,
-                        Tracks = string.Empty,
-                        ThumbnailUrl = "https://img.discogs.com/nHkA-ZD964BcYS2L-5LJY0BeJPc=/600x865/smart/filters:strip_icc():format(jpeg):mode_rgb():quality(40)/discogs-images/A-1240-1499589456-5366.jpeg.jpg"
-                    }
-                });
+            response.Artists.Should().HaveCount(1);
+
+            var artist = response.Artists.First();
+            artist.Id.Should().Be(1240);
+            artist.ResourceUrl.Should().Be("https://api.discogs.com/artists/1240");
+            artist.Name.Should().Be("Emmanuel Top");
 
             // Tracks
 
@@ -150,20 +141,15 @@ namespace DiscogsConnect.Clients
 
             // Labels
 
-            response.Labels.Should().BeEquivalentTo(
-                new List<Release.Label>
-                {
-                    new Release.Label
-                    {
-                        Id = 285,
-                        ResourceUrl = "https://api.discogs.com/labels/285",
-                        Catno = "ATT-V-94 003",
-                        Name = "Attack Records",
-                        EntityType = 1,
-                        EntityTypeName = "Label",
-                        ThumbnailUrl = "https://img.discogs.com/PEbheE7-Ce6UjpQgKZjvOII6Wac=/fit-in/183x108/filters:strip_icc():format(jpeg):mode_rgb():quality(40)/discogs-images/L-285-1099220313.jpg.jpg"
-                    }
-                });
+            response.Labels.Should().HaveCount(1);
+
+            var label = response.Labels.First();
+            label.Id.Should().Be(285);
+            label.ResourceUrl.Should().Be("https://api.discogs.com/labels/285");
+            label.Name.Should().Be("Attack Records");
+            label.Catno.Should().Be("ATT-V-94 003");
+            label.EntityType.Should().Be(1);
+            label.EntityTypeName.Should().Be("Label");
         }
 
         [Fact]

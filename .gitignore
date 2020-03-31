@@ -220,3 +220,5 @@ _Pvt_Extensions
 # Project Rider
 *.iml
 .idea
+
+**/Properties/launchSettings.json
