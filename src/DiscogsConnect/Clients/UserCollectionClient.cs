@@ -33,7 +33,7 @@ namespace DiscogsConnect
         public async Task<FieldCollection> GetFieldsAsync(string username)
             => await _restClient.GetAsync<FieldCollection>($"users/{username}/collection/fields");
         public async Task EditFieldAsync(string username, int folderId, int releaseId, int instanceId, int fieldId, string value)
-            => await _restClient.PostAsync($"users/{username}/collection/folders/{folderId}/releases/{releaseId}/instances/{instanceId}/fields/{fieldId}", new { value });
+            => await _restClient.PostAsync($"users/{username}/collection/folders/{folderId}/releases/{releaseId}/instances/{instanceId}/fields/{fieldId}", null, new { value });
         public async Task<CollectionValue> GetValueAsync(string username)
             => await _restClient.GetAsync<CollectionValue>($"users/{username}/collection/value");
     }
