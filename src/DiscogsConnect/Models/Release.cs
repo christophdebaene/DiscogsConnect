@@ -18,8 +18,9 @@ namespace DiscogsConnect
         public Community Community { get; set; }
         public List<string> Styles { get; set; }
         public List<string> Genres { get; set; }
-        public List<Label> Labels { get; set; }
-        public List<Company> Companies { get; set; }
+        public List<Entity> Labels { get; set; }
+        public List<Entity> Series { get; set; }
+        public List<Entity> Companies { get; set; }
 
         [JsonProperty("extraartists")]
         public List<Artist> ExtraArtists { get; set; }
@@ -38,16 +39,7 @@ namespace DiscogsConnect
         public string Thumb { get; set; }
         public int MasterId { get; set; }
         public int EstimatedWeight { get; set; }
-
-        public class Label : Resource
-        {
-            public string Name { get; set; }
-            public int EntityType { get; set; }
-            public string Catno { get; set; }
-            public string EntityTypeName { get; set; }
-            public string ThumbnailUrl { get; set; }
-        }
-
+      
         public class Artist : Resource
         {
             public string Tracks { get; set; }
@@ -55,29 +47,14 @@ namespace DiscogsConnect
             public string Anv { get; set; }
             public string Join { get; set; }
             public string Name { get; set; }
-            public string ThumbnailUrl { get; set; }
+            public string ThumbnailUrl { get; set; }            
         }
-
-        public class Company : Resource
-        {
-            public string EntityType { get; set; }
-            public string Catno { get; set; }
-            public string EntityTypeName { get; set; }
-            public string Name { get; set; }
-        }
-
+      
         public class Identifier
         {
             public string Type { get; set; }
             public string Description { get; set; }
             public string Value { get; set; }
-        }
-
-        public class Format
-        {
-            public List<string> Descriptions { get; set; }
-            public string Name { get; set; }
-            public string Qty { get; set; }
-        }
+        }            
     }
 }

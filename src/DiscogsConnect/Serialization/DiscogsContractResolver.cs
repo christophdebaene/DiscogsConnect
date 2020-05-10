@@ -15,6 +15,7 @@ namespace DiscogsConnect
             { typeof(MasterVersion), "Versions"},
             { typeof(SearchResult), "Results"},
             { typeof(CollectionItem), "Releases"},
+            { typeof(Wants), "Wants"},
         };
 
         public DiscogsContractResolver()

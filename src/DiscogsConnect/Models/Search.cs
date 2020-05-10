@@ -14,7 +14,6 @@ namespace DiscogsConnect
     public class ArtistSearchResult : SearchResult
     {
     }
-
     public class ReleaseSearchResult : SearchResult
     {
         [JsonProperty("style")]

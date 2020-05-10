@@ -1,24 +1,27 @@
-﻿using System.Net.Http;
+﻿using DiscogsConnect.Http;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace DiscogsConnect
 {
     internal class DatabaseClient : IDatabaseClient
     {
-        private readonly HttpClient _httpClient;
-        public DatabaseClient(HttpClient httpClient)
-            => _httpClient = httpClient;
+        private readonly IRestClient _restClient;
+        public DatabaseClient(IRestClient restClient)
+            => _restClient = restClient;
         public async Task<Release> GetReleaseAsync(int id, Currency currency = Currency.NONE)
-            => await _httpClient.GetAsync<Release>($"releases/{id}", new[] { ("curr_abbr", currency.ToString()) });
+            => await _restClient.GetAsync<Release>($"releases/{id}", new { curr_abbr = currency.ToString() });
         public async Task<ReleaseRating> GetReleaseRatingAsync(int id)
-            => await _httpClient.GetAsync<ReleaseRating>($"releases/{id}/rating");
+            => await _restClient.GetAsync<ReleaseRating>($"releases/{id}/rating");
         public async Task<Artist> GetArtistAsync(int id)
-            => await _httpClient.GetAsync<Artist>($"artists/{id}");
-        public async Task<PaginationResponse<ArtistRelease>> GetArtistReleasesAsync(int id, int page = 1, int perPage = 100)
-            => await _httpClient.GetPagedAsync<ArtistRelease>($"artists/{id}/releases", page, perPage);
+            => await _restClient.GetAsync<Artist>($"artists/{id}");
+        public async Task<PaginationResponse<ArtistRelease>> GetArtistReleasesAsync(int id, int page = 1, int per_page = 100)
+            => await _restClient.GetAsync<PaginationResponse<ArtistRelease>>($"artists/{id}/releases", new { page, per_page });
+        public async Task<List<ArtistRelease>> GetArtistReleasesAllAsync(int id)
+            => await _restClient.GetAllPagesAsync<ArtistRelease>($"artists/{id}/releases");
         public async Task<Master> GetMasterReleaseAsync(int id)
-            => await _httpClient.GetAsync<Master>($"masters/{id}");
-        public async Task<PaginationResponse<SearchResult>> SearchAsync(SearchCriteria criteria, int page = 1, int perPage = 100)
-            => await _httpClient.GetPagedAsync<SearchResult>("database/search", page, perPage, criteria.Parameters());
+            => await _restClient.GetAsync<Master>($"masters/{id}");
+        public async Task<PaginationResponse<SearchResult>> SearchAsync(SearchCriteria criteria)
+            => await _restClient.GetAsync<PaginationResponse<SearchResult>>("database/search", criteria);
     }
 }

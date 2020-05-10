@@ -15,8 +15,9 @@ namespace DiscogsConnect
     public class DiscogsClient : IDiscogsClient
     {
         public static readonly Uri DiscogsApiUrl = new Uri("https://api.discogs.com");
+        
+        private readonly IRestClient _restClient;
 
-        private readonly HttpClient _client;
         public IDatabaseClient Database { get; }
         public IImageClient Image { get; }
         public IUserCollectionClient UserCollection { get; }
@@ -25,17 +26,18 @@ namespace DiscogsConnect
         {
         }
         public DiscogsClient(DiscogsOptions options, HttpClient client)
-        {
-            _client = client;
-            _client.BaseAddress = DiscogsApiUrl;
-            _client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            _client.DefaultRequestHeaders.Add("User-Agent", options.UserAgent);
-            _client.DefaultRequestHeaders.Add("Authorization", $"Discogs token={options.Token}");
+        {            
+            client.BaseAddress = DiscogsApiUrl;
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            client.DefaultRequestHeaders.Add("User-Agent", options.UserAgent);
+            client.DefaultRequestHeaders.Add("Authorization", $"Discogs token={options.Token}");
 
-            Database = new DatabaseClient(_client);
-            Image = new ImageClient(_client);
-            UserCollection = new UserCollectionClient(_client);
-            UserWantlist = new UserWantlistClient(_client);
+            _restClient = new RestClient(client);
+
+            Database = new DatabaseClient(_restClient);
+            Image = new ImageClient(_restClient);
+            UserCollection = new UserCollectionClient(_restClient);
+            UserWantlist = new UserWantlistClient(_restClient);
         }
     }
 }

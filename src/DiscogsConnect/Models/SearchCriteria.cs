@@ -1,9 +1,4 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace DiscogsConnect
+﻿namespace DiscogsConnect
 {
     public class SearchCriteria
     {
@@ -25,14 +20,7 @@ namespace DiscogsConnect
         public string Track { get; set; }
         public string Submitter { get; set; }
         public string Contributor { get; set; }
-
-        internal IEnumerable<(string Name, string Value)> Parameters()
-        {
-            var jsonSerializer = JsonSerializer.CreateDefault(DiscogsSerializerSettings.Default);
-            return JObject.FromObject(this, jsonSerializer)
-                .Properties()
-                .Where(x => !string.IsNullOrEmpty(x.Value.ToString()))
-                .Select(x => (x.Name, x.Value.ToString()));
-        }
+        public int Page { get; set; } = 1;
+        public int PerPage { get; set; } = 100;        
     }
 }

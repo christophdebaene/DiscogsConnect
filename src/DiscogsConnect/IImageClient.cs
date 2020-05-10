@@ -4,6 +4,6 @@ namespace DiscogsConnect
 {
     public interface IImageClient
     {
-        Task<byte[]> GetImageAsync(string uri);
+        Task<byte[]> GetAsync(string uri);
     }
 }

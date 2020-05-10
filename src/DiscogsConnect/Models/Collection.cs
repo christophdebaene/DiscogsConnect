@@ -5,27 +5,23 @@ namespace DiscogsConnect
 {
     public class Folder : Resource
     {
-        public string Count { get; set; }
+        public int Count { get; set; }
         public string Name { get; set; }
 
         public override string ToString()
-        {
-            return $"{Name} ({Count})";
-        }
+            => $"{Name} ({Count})";        
     }
-
-    public class FolderResponse
+    public class FolderCollection
     {
         public List<Folder> Folders { get; set; }
     }
-
     public class AddToCollectionResponse
     {
         public int InstanceId { get; set; }
         public string ResourceUrl { get; set; }
     }
 
-    public class FieldsResponse
+    public class FieldCollection
     {
         public List<Field> Fields { get; set; }
     }
@@ -62,8 +58,8 @@ namespace DiscogsConnect
             public string CoverImage { get; set; }
             public int Year { get; set; }
 
-            public List<Release.Label> Labels { get; set; }
-            public List<Release.Format> Formats { get; set; }
+            public List<Entity> Labels { get; set; }
+            public List<Entity> Formats { get; set; }
             public List<Release.Artist> Artists { get; set; }
         }
     }
