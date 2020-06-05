@@ -105,8 +105,7 @@ namespace DiscogsConnect.Clients
 
             response.Id.Should().Be(releaseId);
             response.Uri.Should().Be("https://www.discogs.com/Emmanuel-Top-This-Is-A-Acid-Phase/release/8310");
-            response.ResourceUrl.Should().Be("https://api.discogs.com/releases/8310");
-            response.DataQuality.Should().Be(DataQuality.Correct);
+            response.ResourceUrl.Should().Be("https://api.discogs.com/releases/8310");            
             response.Title.Should().Be("This Is A...? / Acid Phase");
             response.Year.Should().Be(1994);
             response.MasterId.Should().Be(36961);
