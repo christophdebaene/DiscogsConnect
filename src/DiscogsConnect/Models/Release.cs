@@ -35,7 +35,7 @@ namespace DiscogsConnect
 
         public List<Identifier> Identifiers { get; set; }
         public int NumForSale { get; set; }
-        public float LowestPrice { get; set; }
+        public float? LowestPrice { get; set; }
         public string Thumb { get; set; }
         public int MasterId { get; set; }
         public int EstimatedWeight { get; set; }
