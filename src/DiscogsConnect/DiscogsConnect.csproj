@@ -12,7 +12,7 @@
     <Company />
     <Description>DiscogsConnect is a .NET client library for accessing the REST API v2.0 of Discogs</Description>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>    
-    <MinVerMinimumMajorMinor>1.0</MinVerMinimumMajorMinor>
+    <MinVerMinimumMajorMinor>1.1</MinVerMinimumMajorMinor>
     <MinVerAutoIncrement>minor</MinVerAutoIncrement>
   </PropertyGroup>
 
