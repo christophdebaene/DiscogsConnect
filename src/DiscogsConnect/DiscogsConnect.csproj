@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -11,9 +11,8 @@
     <Authors>Christoph De Baene</Authors>
     <Company />
     <Description>DiscogsConnect is a .NET client library for accessing the REST API v2.0 of Discogs</Description>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>    
-    <MinVerMinimumMajorMinor>1.1</MinVerMinimumMajorMinor>
-    <MinVerAutoIncrement>minor</MinVerAutoIncrement>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <MinVerTagPrefix>v</MinVerTagPrefix>
   </PropertyGroup>
 
   <ItemGroup>
