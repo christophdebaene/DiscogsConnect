@@ -1,6 +1,6 @@
-﻿using DiscogsConnect.Test;
+﻿using System.Threading.Tasks;
+using DiscogsConnect.Test;
 using FluentAssertions;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace DiscogsConnect.Clients

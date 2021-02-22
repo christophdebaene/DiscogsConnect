@@ -1,5 +1,5 @@
-﻿using Newtonsoft.Json;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace DiscogsConnect
 {
@@ -39,7 +39,7 @@ namespace DiscogsConnect
         public string Thumb { get; set; }
         public int MasterId { get; set; }
         public int EstimatedWeight { get; set; }
-      
+
         public class Artist : Resource
         {
             public string Tracks { get; set; }
@@ -47,14 +47,14 @@ namespace DiscogsConnect
             public string Anv { get; set; }
             public string Join { get; set; }
             public string Name { get; set; }
-            public string ThumbnailUrl { get; set; }            
+            public string ThumbnailUrl { get; set; }
         }
-      
+
         public class Identifier
         {
             public string Type { get; set; }
             public string Description { get; set; }
             public string Value { get; set; }
-        }            
+        }
     }
 }

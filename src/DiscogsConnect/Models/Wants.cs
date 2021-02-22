@@ -1,12 +1,11 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace DiscogsConnect
 {
-    public class Wants: Resource
+    public class Wants : Resource
     {
-        public int Rating { get; set; }        
+        public int Rating { get; set; }
         public Information BasicInformation { get; set; }
         public string Notes { get; set; }
         public DateTime DateAdded { get; set; }

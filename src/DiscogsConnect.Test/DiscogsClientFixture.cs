@@ -1,17 +1,17 @@
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System;
 using System.IO;
 using System.Linq;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Xunit;
 
 namespace DiscogsConnect.Test
 {
     public class DiscogsClientFixture
-    {        
+    {
         public IDiscogsClient DiscogsClient { get; }
         public DiscogsClientFixture()
-            =>  DiscogsClient = new DiscogsClient(DiscogsOptionsFactory.Create());        
+            => DiscogsClient = new DiscogsClient(DiscogsOptionsFactory.Create());
     }
 
     [CollectionDefinition("DiscogsClient")]
@@ -22,12 +22,12 @@ namespace DiscogsConnect.Test
     {
         public const string UserAgent = "DiscogsConnect/2.0";
         public static DiscogsOptions Create()
-            => new DiscogsOptions 
-            { 
-                UserAgent = UserAgent, 
-                Token = Environment.GetEnvironmentVariable("DISCOGS_TOKEN") 
+            => new DiscogsOptions
+            {
+                UserAgent = UserAgent,
+                Token = Environment.GetEnvironmentVariable("DISCOGS_TOKEN")
             };
-            
+
         static DiscogsOptionsFactory()
         {
             var path = @"Properties\launchSettings.json";
@@ -36,7 +36,7 @@ namespace DiscogsConnect.Test
             {
                 using (var launchSettingsFile = File.OpenText(path))
                 using (var jsonReader = new JsonTextReader(launchSettingsFile))
-                { 
+                {
                     var jsonObject = JObject.Load(jsonReader);
 
                     jsonObject

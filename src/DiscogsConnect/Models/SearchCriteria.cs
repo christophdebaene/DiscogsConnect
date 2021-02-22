@@ -21,6 +21,6 @@
         public string Submitter { get; set; }
         public string Contributor { get; set; }
         public int Page { get; set; } = 1;
-        public int PerPage { get; set; } = 100;        
+        public int PerPage { get; set; } = 100;
     }
 }

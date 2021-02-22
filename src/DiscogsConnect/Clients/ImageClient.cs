@@ -1,5 +1,5 @@
-﻿using DiscogsConnect.Http;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using DiscogsConnect.Http;
 
 namespace DiscogsConnect
 {

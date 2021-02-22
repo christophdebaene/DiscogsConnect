@@ -1,8 +1,8 @@
-﻿using DiscogsConnect.Test;
-using FluentAssertions;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DiscogsConnect.Test;
+using FluentAssertions;
 using Xunit;
 
 namespace DiscogsConnect.Clients
@@ -105,7 +105,7 @@ namespace DiscogsConnect.Clients
 
             response.Id.Should().Be(releaseId);
             response.Uri.Should().Be("https://www.discogs.com/Emmanuel-Top-This-Is-A-Acid-Phase/release/8310");
-            response.ResourceUrl.Should().Be("https://api.discogs.com/releases/8310");            
+            response.ResourceUrl.Should().Be("https://api.discogs.com/releases/8310");
             response.Title.Should().Be("This Is A...? / Acid Phase");
             response.Year.Should().Be(1994);
             response.MasterId.Should().Be(36961);

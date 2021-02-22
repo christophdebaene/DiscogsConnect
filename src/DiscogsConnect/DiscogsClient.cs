@@ -1,7 +1,7 @@
-﻿using DiscogsConnect.Http;
-using System;
+﻿using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using DiscogsConnect.Http;
 
 namespace DiscogsConnect
 {
@@ -15,7 +15,7 @@ namespace DiscogsConnect
     public class DiscogsClient : IDiscogsClient
     {
         public static readonly Uri DiscogsApiUrl = new Uri("https://api.discogs.com");
-        
+
         private readonly IRestClient _restClient;
 
         public IDatabaseClient Database { get; }
@@ -26,7 +26,7 @@ namespace DiscogsConnect
         {
         }
         public DiscogsClient(DiscogsOptions options, HttpClient client)
-        {            
+        {
             client.BaseAddress = DiscogsApiUrl;
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             client.DefaultRequestHeaders.Add("User-Agent", options.UserAgent);

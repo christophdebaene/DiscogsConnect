@@ -9,7 +9,7 @@ namespace DiscogsConnect
         public string Name { get; set; }
 
         public override string ToString()
-            => $"{Name} ({Count})";        
+            => $"{Name} ({Count})";
     }
     public class FolderCollection
     {

@@ -10,5 +10,5 @@ namespace DiscogsConnect
         Task<Wants> AddAsync(string username, int releaseId, string notes, int rating = 0);
         Task<Wants> UpdateAsync(string username, int releaseId, string notes, int rating = 0);
         Task RemoveAsync(string username, int releaseId);
-    }   
+    }
 }

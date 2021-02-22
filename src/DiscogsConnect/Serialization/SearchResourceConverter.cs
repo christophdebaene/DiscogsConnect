@@ -1,7 +1,7 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System;
+﻿using System;
 using System.Reflection;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace DiscogsConnect
 {
@@ -9,13 +9,13 @@ namespace DiscogsConnect
     {
         protected SearchResult Create(Type objectType, JObject jObject)
         {
-            return jObject["type"].ToString().ToLower() switch
+            return jObject["type"].ToString().ToLowerInvariant() switch
             {
                 "artist" => new ArtistSearchResult(),
                 "label" => new LabelSearchResult(),
                 "master" => new MasterSearchResult(),
                 "release" => new ReleaseSearchResult(),
-                _ => throw new Exception($"The given result type {jObject["type"].ToString()} is not supported!")
+                _ => throw new Exception($"The given result type {jObject["type"]} is not supported!")
             };
         }
 

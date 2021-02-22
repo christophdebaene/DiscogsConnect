@@ -1,11 +1,11 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace DiscogsConnect.Http
 {
@@ -13,7 +13,7 @@ namespace DiscogsConnect.Http
     {
         Task<byte[]> GetByteArrayAsync(string path);
         Task<TResult> SendAsync<TResult>(HttpMethod method, string path, object parameters, object content) where TResult : class;
-    } 
+    }
 
     public class RestClient : IRestClient
     {
@@ -37,12 +37,12 @@ namespace DiscogsConnect.Http
 
                 if (typeof(TResult) == typeof(Unit))
                     return Unit.Value as TResult;
-                
+
                 string responseBody = await response.Content.ReadAsStringAsync();
-                return JsonConvert.DeserializeObject<TResult>(responseBody, DiscogsSerializerSettings.Default);                
+                return JsonConvert.DeserializeObject<TResult>(responseBody, DiscogsSerializerSettings.Default);
             }
         }
-        
+
         static Dictionary<string, string> ToDictionary(object values)
         {
             if (values == null)
@@ -58,11 +58,11 @@ namespace DiscogsConnect.Http
         static Uri CreateUri(string path, object values)
         {
             var dictionary = ToDictionary(values);
-                        
+
             if (dictionary != null && dictionary.Any())
                 path = path + "?" + string.Join("&", dictionary.Select(x =>
                     $"{Uri.EscapeDataString(x.Key)}={Uri.EscapeDataString(x.Value)}"));
-                    
+
             return new Uri(path, UriKind.Relative);
         }
         static HttpContent CreateContent<T>(T content = null) where T : class
