@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DiscogsConnect.Test;
@@ -104,7 +105,7 @@ namespace DiscogsConnect.Clients
             var response = await Client.Database.GetReleaseAsync(releaseId);
 
             response.Id.Should().Be(releaseId);
-            response.Uri.Should().Be("https://www.discogs.com/Emmanuel-Top-This-Is-A-Acid-Phase/release/8310");
+            response.Uri.Should().Be("https://www.discogs.com/release/8310-Emmanuel-Top-This-Is-A-Acid-Phase");
             response.ResourceUrl.Should().Be("https://api.discogs.com/releases/8310");
             response.Title.Should().Be("This Is A...? / Acid Phase");
             response.Year.Should().Be(1994);
@@ -170,7 +171,7 @@ namespace DiscogsConnect.Clients
             var release = response.Items.Cast<ReleaseSearchResult>().First();
 
             release.Id.Should().Be(1017350);
-            release.Uri.Should().Be("/Various-Serious-Beats-55/release/1017350");
+            release.Uri.Should().Be("/release/1017350-Various-Serious-Beats-55");
             release.ResourceUrl.Should().Be("https://api.discogs.com/releases/1017350");
             release.Type.Should().Be(ResourceType.Release);
             release.Country.Should().Be("Belgium");
@@ -181,6 +182,102 @@ namespace DiscogsConnect.Clients
             release.Styles.Should().ContainSingle("House");
             release.Formats.Should().Contain("CD", "Compilation");
             release.Barcodes.Should().Contain("SABAM", "NEWS541416501825");
+        }
+
+        [Fact]
+        public async Task SearchUsingBarcodeAsync()
+        {
+            var criteria = new SearchCriteria
+            {
+                Barcode = "5051275019025"
+            };
+
+            var response = await Client.Database.SearchAsync(criteria);
+
+            response.Should().NotBeNull();
+
+            response.Items.Should().NotBeEmpty();
+            response.Items.Should().HaveCount(1);
+
+            var release = response.Items.Cast<ReleaseSearchResult>().First();
+
+            release.Id.Should().Be(1669104);
+            release.Uri.Should().Be("/Various-Creamfields-10-Years-The-Album/release/1669104");
+            release.ResourceUrl.Should().Be("https://api.discogs.com/releases/1669104");
+            release.Type.Should().Be(ResourceType.Release);
+            release.Country.Should().Be("UK");
+            release.Title.Should().Be("Various - Creamfields 10 Years - The Album");
+            release.Year.Should().Be(2008);
+            release.Catno.Should().Be("CREAMCD5");
+            release.Genres.Should().ContainSingle("Electronic");
+            release.Styles.Should().Contain("Trance");
+            release.Formats.Should().Contain("CD", "Mixed");
+            release.Barcodes.Should().Contain("5051275019025");
+        }
+
+        [Fact]
+        public async Task GetReleaseWithComplexArtistsAsync()
+        {
+            // https://www.discogs.com/release/1669104-Various-Creamfields-10-Years-The-Album"
+            var releaseId = 1669104;
+
+            var response = await Client.Database.GetReleaseAsync(releaseId);
+
+            response.Id.Should().Be(releaseId);
+            response.Uri.Should().Be("https://www.discogs.com/release/1669104-Various-Creamfields-10-Years-The-Album");
+            response.ResourceUrl.Should().Be("https://api.discogs.com/releases/1669104");
+            response.Title.Should().Be("Creamfields 10 Years - The Album");
+            response.Year.Should().Be(2008);
+            response.Country.Should().Be("UK");
+            response.FormatQuantity.Should().Be(3);
+            response.Genres.Should().Contain("Electronic");
+            response.Styles.Should().Contain("Trance", "Progressive Trance");
+            response.Released.Should().Be("2008-08-25");
+            response.ReleasedFormatted.Should().Be("25 Aug 2008");
+            response.Status.Should().Be("Accepted");
+            response.Videos.Should().NotBeEmpty();
+            response.Images.Should().NotBeEmpty();
+            response.Companies.Should().NotBeEmpty();
+
+            // Artists
+
+            response.Artists.Should().HaveCount(1);
+
+            var artist = response.Artists.First();
+            artist.Id.Should().Be(194);
+            artist.Name.Should().Be("Various");
+
+            // Tracks
+            response.Tracks.Should().HaveCount(54);
+
+            // Simple Artist
+            var t1 = response.Tracks.FirstOrDefault(x => x.Position == "1-1");
+            t1.Should().NotBeNull();
+            t1.Title.Should().Be("God Is A DJ");
+            t1.Artists.Should().HaveCount(1);
+            t1.Artists.First().Name.Should().Be("Faithless");
+
+            // Complex Artist
+            var t9 = response.Tracks.FirstOrDefault(x => x.Position == "1-9");
+            t9.Should().NotBeNull();
+            t9.Title.Should().Be("Not Over (Robert Vadney's 3AM Goodbye Remix)");
+            t9.Artists.Should().HaveCount(2);
+
+            t9.Artists.Should().HaveCount(2);
+            t9.Artists.Should().BeEquivalentTo(
+                new List<Track.Artist>
+                {
+                    new Track.Artist {Id =67218, Name = "Paul Oakenfold", NameVariation = "Oakenfold", Join = "Feat.", Role = String.Empty, ResourceUrl = "https://api.discogs.com/artists/67218"},
+                    new Track.Artist {Id =193421, Name = "Ryan Tedder", NameVariation = String.Empty, Join = String.Empty, Role = String.Empty, ResourceUrl = "https://api.discogs.com/artists/193421"}
+                });
+
+            t9.ExtraArtists.Should().HaveCount(2);
+            t9.ExtraArtists.Should().BeEquivalentTo(
+                new List<Track.Artist>
+                {
+                    new Track.Artist {Id =720045, Name = "Robert Vadney", NameVariation = String.Empty, Join = String.Empty, Role = "Remix", ResourceUrl = "https://api.discogs.com/artists/720045"},
+                    new Track.Artist {Id =193421, Name = "Ryan Tedder", NameVariation = String.Empty, Join = String.Empty, Role = "Vocals [Featuring]", ResourceUrl = "https://api.discogs.com/artists/193421"}
+                });
         }
     }
 }

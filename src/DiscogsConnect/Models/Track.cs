@@ -20,6 +20,11 @@ namespace DiscogsConnect
         public class Artist : Resource
         {
             public string Name { get; set; }
+
+            [JsonProperty("anv")]
+            public string NameVariation { get; set; }
+            public string Join { get; set; }
+            public string Role { get; set; }
         }
     }
 }
