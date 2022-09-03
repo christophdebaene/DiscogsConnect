@@ -73,4 +73,8 @@ public class RateLimitHandler : HttpClientHandler
 }
 ```
 
+## Development
 
+After cloning the project, go to the `Properties` directory in the test project, rename `_launchSettings.json` to `launchSettings.json`
+(remove the preceding underscore) and edit the file to insert your personal Discord token.
+This file is gitignore'd after renaming so you won't have to worry about accidentally leaking your token.
