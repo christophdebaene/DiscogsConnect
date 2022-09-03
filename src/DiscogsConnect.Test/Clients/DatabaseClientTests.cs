@@ -104,7 +104,7 @@ namespace DiscogsConnect.Clients
             var response = await Client.Database.GetReleaseAsync(releaseId);
 
             response.Id.Should().Be(releaseId);
-            response.Uri.Should().Be("https://www.discogs.com/Emmanuel-Top-This-Is-A-Acid-Phase/release/8310");
+            response.Uri.Should().Be("https://www.discogs.com/release/8310-Emmanuel-Top-This-Is-A-Acid-Phase");
             response.ResourceUrl.Should().Be("https://api.discogs.com/releases/8310");
             response.Title.Should().Be("This Is A...? / Acid Phase");
             response.Year.Should().Be(1994);
@@ -170,7 +170,7 @@ namespace DiscogsConnect.Clients
             var release = response.Items.Cast<ReleaseSearchResult>().First();
 
             release.Id.Should().Be(1017350);
-            release.Uri.Should().Be("/Various-Serious-Beats-55/release/1017350");
+            release.Uri.Should().Be("/release/1017350-Various-Serious-Beats-55");
             release.ResourceUrl.Should().Be("https://api.discogs.com/releases/1017350");
             release.Type.Should().Be(ResourceType.Release);
             release.Country.Should().Be("Belgium");
