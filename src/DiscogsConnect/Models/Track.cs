@@ -21,5 +21,9 @@ public class Track
     public class Artist : Resource
     {
         public string Name { get; set; }
+        public string Join { get; set; }
+        public string Role { get; set; }
+        [JsonProperty("anv")] // Artist Name Variation: https://support.discogs.com/hc/en-us/articles/360005054753-Database-Guidelines-2-Artist#Artist_Name_Variation_ANV
+        public string NameVariation { get; set; }
     }
 }
