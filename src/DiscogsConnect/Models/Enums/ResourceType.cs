@@ -1,19 +1,18 @@
 ﻿using System.Runtime.Serialization;
 
-namespace DiscogsConnect
+namespace DiscogsConnect;
+
+public enum ResourceType
 {
-    public enum ResourceType
-    {
-        [EnumMember(Value = "release")]
-        Release,
+    [EnumMember(Value = "release")]
+    Release,
 
-        [EnumMember(Value = "master")]
-        Master,
+    [EnumMember(Value = "master")]
+    Master,
 
-        [EnumMember(Value = "artist")]
-        Artist,
+    [EnumMember(Value = "artist")]
+    Artist,
 
-        [EnumMember(Value = "label")]
-        Label
-    }
+    [EnumMember(Value = "label")]
+    Label
 }

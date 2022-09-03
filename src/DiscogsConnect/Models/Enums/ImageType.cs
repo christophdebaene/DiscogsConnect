@@ -1,8 +1,7 @@
-﻿namespace DiscogsConnect
+﻿namespace DiscogsConnect;
+
+public enum ImageType
 {
-    public enum ImageType
-    {
-        Primary,
-        Secondary
-    }
+    Primary,
+    Secondary
 }

@@ -1,8 +1,7 @@
-﻿namespace DiscogsConnect
+﻿namespace DiscogsConnect;
+
+public abstract class Resource
 {
-    public abstract class Resource
-    {
-        public int Id { get; set; }
-        public string ResourceUrl { get; set; }
-    }
+    public int Id { get; set; }
+    public string ResourceUrl { get; set; }
 }

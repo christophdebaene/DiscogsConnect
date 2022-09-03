@@ -1,9 +1,8 @@
 ﻿using System.Threading.Tasks;
 
-namespace DiscogsConnect
+namespace DiscogsConnect;
+
+public interface IImageClient
 {
-    public interface IImageClient
-    {
-        Task<byte[]> GetAsync(string uri);
-    }
+    Task<byte[]> GetAsync(string uri);
 }
