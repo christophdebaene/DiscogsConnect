@@ -155,6 +155,20 @@ public class DatabaseClientTests
     }
 
     [Fact]
+    public async Task FormattedArtist()
+    {
+        var releaseId = 6163259;
+
+        var response = await Client.Database.GetReleaseAsync(releaseId);
+
+        // Track
+
+        var track = response.Tracks[35];
+        track.Position.Should().Be("2-18");
+        track.GetFormattedArtists().Should().Be("Craig Mack Feat. Busta Rhymes, LL Cool J, Notorious B.I.G. & Rampage (2)");
+    }
+
+    [Fact]
     public async Task SearchAsync()
     {
         var criteria = new SearchCriteria

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 using Newtonsoft.Json;
 
@@ -17,6 +18,20 @@ public class Track
     public List<Artist> ExtraArtists { get; set; }
 
     public List<Artist> Artists { get; set; }
+
+    public string GetFormattedArtists() =>
+        Artists.Select(artist =>
+        {
+            var join = !string.IsNullOrEmpty(artist.Join)
+                ? artist.Join switch
+                {
+                    "," => ", ",
+                    _ => $" {artist.Join} " // &, Feat., Vs., ...
+                }
+                : string.Empty;
+
+            return $"{artist.Name}{join}";
+        }).Aggregate((result, e) => $"{result}{e}");
 
     public class Artist : Resource
     {
