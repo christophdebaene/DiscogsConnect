@@ -1,10 +1,9 @@
-﻿namespace DiscogsConnect
+﻿namespace DiscogsConnect;
+
+public interface IDiscogsClient
 {
-    public interface IDiscogsClient
-    {
-        IDatabaseClient Database { get; }
-        IImageClient Image { get; }
-        IUserCollectionClient UserCollection { get; }
-        IUserWantlistClient UserWantlist { get; }
-    }
+    IDatabaseClient Database { get; }
+    IImageClient Image { get; }
+    IUserCollectionClient UserCollection { get; }
+    IUserWantlistClient UserWantlist { get; }
 }

@@ -1,19 +1,18 @@
-﻿namespace DiscogsConnect
+﻿namespace DiscogsConnect;
+
+public enum Currency
 {
-    public enum Currency
-    {
-        NONE,
-        USD,
-        GBP,
-        EUR,
-        CAD,
-        AUD,
-        JPY,
-        CHF,
-        MXN,
-        BRL,
-        NZD,
-        SEK,
-        ZAR
-    }
+    NONE,
+    USD,
+    GBP,
+    EUR,
+    CAD,
+    AUD,
+    JPY,
+    CHF,
+    MXN,
+    BRL,
+    NZD,
+    SEK,
+    ZAR
 }
