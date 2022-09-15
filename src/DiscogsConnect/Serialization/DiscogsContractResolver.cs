@@ -1,40 +1,40 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
-namespace DiscogsConnect
+namespace DiscogsConnect;
+
+internal class DiscogsContractResolver : DefaultContractResolver
 {
-    internal class DiscogsContractResolver : DefaultContractResolver
+    private static readonly Dictionary<Type, string> mapping = new Dictionary<Type, string>
     {
-        private static readonly Dictionary<Type, string> mapping = new Dictionary<Type, string>
-        {
-            { typeof(ArtistRelease), "Releases"},
-            { typeof(LabelRelease), "Releases"},
-            { typeof(MasterVersion), "Versions"},
-            { typeof(SearchResult), "Results"},
-            { typeof(CollectionItem), "Releases"},
-            { typeof(Wants), "Wants"},
-        };
+        { typeof(ArtistRelease), "Releases"},
+        { typeof(LabelRelease), "Releases"},
+        { typeof(MasterVersion), "Versions"},
+        { typeof(SearchResult), "Results"},
+        { typeof(CollectionItem), "Releases"},
+        { typeof(Wants), "Wants"},
+    };
 
-        public DiscogsContractResolver()
+    public DiscogsContractResolver()
+    {
+        NamingStrategy = new SnakeCaseNamingStrategy();
+    }
+
+    protected override JsonProperty CreateProperty(MemberInfo member, MemberSerialization memberSerialization)
+    {
+        var jsonProperty = base.CreateProperty(member, memberSerialization);
+
+        if (typeof(PaginationResponse).GetTypeInfo().IsAssignableFrom(member.DeclaringType.GetTypeInfo()) &&
+            member.Name == "Items")
         {
-            NamingStrategy = new SnakeCaseNamingStrategy();
+            var resourceType = member.DeclaringType.GenericTypeArguments[0];
+            jsonProperty.PropertyName = mapping[resourceType];
         }
 
-        protected override JsonProperty CreateProperty(MemberInfo member, MemberSerialization memberSerialization)
-        {
-            var jsonProperty = base.CreateProperty(member, memberSerialization);
-
-            if (typeof(PaginationResponse).GetTypeInfo().IsAssignableFrom(member.DeclaringType.GetTypeInfo()) &&
-                member.Name == "Items")
-            {
-                var resourceType = member.DeclaringType.GenericTypeArguments[0];
-                jsonProperty.PropertyName = mapping[resourceType];
-            }
-
-            return jsonProperty;
-        }
+        return jsonProperty;
     }
 }

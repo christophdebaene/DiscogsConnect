@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Test": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DISCOGS_TOKEN": "INSERT_TOKEN_HERE"
+      }
+    }
+  }
+}
