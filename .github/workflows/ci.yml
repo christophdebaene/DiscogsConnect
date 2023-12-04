@@ -27,3 +27,4 @@ jobs:
       run: dotnet test --no-restore --verbosity normal
       env:
         DISCOGS_TOKEN: ${{ secrets.DISCOGS_TOKEN }}
+        DISCOGS_USERNAME: ${{ secrets.DISCOGS_USERNAME }}
