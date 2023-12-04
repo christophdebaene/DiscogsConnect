@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
-
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace DiscogsConnect;
 
@@ -13,7 +12,7 @@ public class Artist : Resource
     public string Profile { get; set; }
     public DataQuality DataQuality { get; set; }
 
-    [JsonProperty("namevariations")]
+    [JsonPropertyName("namevariations")]
     public List<string> NameVariations { get; set; }
 
     public List<Alias> Aliases { get; set; }

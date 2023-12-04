@@ -4,7 +4,7 @@ namespace DiscogsConnect;
 
 internal class Unit : IEquatable<Unit>, IComparable<Unit>, IComparable
 {
-    public static readonly Unit Value = new Unit();
+    public static readonly Unit Value = new();
     public int CompareTo(Unit other) => 0;
     int IComparable.CompareTo(object obj) => 0;
     public override int GetHashCode() => 0;

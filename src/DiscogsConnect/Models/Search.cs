@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
-
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
+using DiscogsConnect.Serialization;
 
 namespace DiscogsConnect;
 
+[JsonConverter(typeof(SearchResultConverter))]
 public abstract class SearchResult : Resource
 {
     public ResourceType Type { get; set; }
@@ -11,53 +12,34 @@ public abstract class SearchResult : Resource
     public string Title { get; set; }
     public string Uri { get; set; }
 }
-
 public class ArtistSearchResult : SearchResult
 {
 }
 public class ReleaseSearchResult : SearchResult
 {
-    [JsonProperty("style")]
-    public List<string> Styles { get; set; }
-
-    [JsonProperty("format")]
-    public List<string> Formats { get; set; }
-
+    public List<string> Style { get; set; }
+    public List<string> Format { get; set; }
+    public List<Format> Formats { get; set; }
+    public int FormatQuantity { get; set; }
     public string Country { get; set; }
-
-    [JsonProperty("barcode")]
-    public List<string> Barcodes { get; set; }
-
-    [JsonProperty("label")]
-    public List<string> Labels { get; set; }
-
+    public List<string> Barcode { get; set; }
+    public List<string> Label { get; set; }
     public string Catno { get; set; }
-    public int Year { get; set; }
-
-    [JsonProperty("genre")]
-    public List<string> Genres { get; set; }
+    public string Year { get; set; }
+    public List<string> Genre { get; set; }
 }
 
 public class LabelSearchResult : SearchResult
 {
 }
-
 public class MasterSearchResult : SearchResult
 {
-    [JsonProperty("style")]
-    public List<string> Styles { get; set; }
-
-    [JsonProperty("format")]
-    public List<string> Formats { get; set; }
-
+    public List<string> Style { get; set; }
+    public List<string> Format { get; set; }
     public string Country { get; set; }
-
-    [JsonProperty("label")]
-    public List<string> Labels { get; set; }
-
+    public List<string> Label { get; set; }
     public string Catno { get; set; }
-    public int Year { get; set; }
-
-    [JsonProperty("genre")]
-    public List<string> Genres { get; set; }
+    public string Year { get; set; }
+    public List<string> Genre { get; set; }
+    public List<string> Barcode { get; set; }
 }

@@ -15,7 +15,7 @@ public class DiscogsOptions
 
 public class DiscogsClient : IDiscogsClient
 {
-    public static readonly Uri DiscogsApiUrl = new Uri("https://api.discogs.com");
+    public static readonly Uri DiscogsApiUrl = new("https://api.discogs.com");
 
     private readonly IRestClient _restClient;
 

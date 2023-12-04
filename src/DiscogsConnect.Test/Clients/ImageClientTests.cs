@@ -1,9 +1,6 @@
 ﻿using System.Threading.Tasks;
-
 using DiscogsConnect.Test;
-
 using FluentAssertions;
-
 using Xunit;
 
 namespace DiscogsConnect.Clients;

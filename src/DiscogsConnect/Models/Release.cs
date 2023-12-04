@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
-
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace DiscogsConnect;
 
@@ -23,7 +22,7 @@ public class Release : Resource
     public List<Entity> Series { get; set; }
     public List<Entity> Companies { get; set; }
 
-    [JsonProperty("extraartists")]
+    [JsonPropertyName("extraartists")]
     public List<Artist> ExtraArtists { get; set; }
 
     public List<Video> Videos { get; set; }
@@ -31,7 +30,7 @@ public class Release : Resource
     public List<Format> Formats { get; set; }
     public List<Image> Images { get; set; }
 
-    [JsonProperty("tracklist")]
+    [JsonPropertyName("tracklist")]
     public List<Track> Tracks { get; set; }
 
     public List<Identifier> Identifiers { get; set; }

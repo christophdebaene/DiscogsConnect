@@ -5,7 +5,7 @@ using DiscogsConnect.Http;
 
 namespace DiscogsConnect;
 
-public class UserWantlistClient : IUserWantlistClient
+internal class UserWantlistClient : IUserWantlistClient
 {
     private readonly IRestClient _restClient;
     public UserWantlistClient(IRestClient restClient)

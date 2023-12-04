@@ -6,9 +6,9 @@ namespace DiscogsConnect.Http;
 
 public class RateLimit
 {
-    public int Total { get; set; }
-    public int Used { get; set; }
-    public int Remaining { get; set; }
+    public int? Total { get; set; }
+    public int? Used { get; set; }
+    public int? Remaining { get; set; }
     public static RateLimit Parse(HttpResponseMessage response)
     {
         return new RateLimit
@@ -18,8 +18,7 @@ public class RateLimit
             Remaining = GetHeaderValueAsIntSafe(response, "X-Discogs-Ratelimit-Remaining"),
         };
     }
-
-    private static int GetHeaderValueAsIntSafe(HttpResponseMessage response, string key)
+    private static int? GetHeaderValueAsIntSafe(HttpResponseMessage response, string key)
     {
         if (response.Headers.TryGetValues(key, out IEnumerable<string> values))
         {
@@ -27,6 +26,6 @@ public class RateLimit
                 return value;
         }
 
-        return 0;
+        return null;
     }
 }

@@ -1,5 +1,4 @@
 ﻿namespace DiscogsConnect;
-
 public abstract class Resource
 {
     public int Id { get; set; }

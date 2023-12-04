@@ -6,7 +6,7 @@ public class Community
 {
     public int Have { get; set; }
     public int Want { get; set; }
-    public DataQuality DataQuality { get; set; }
+    //public DataQuality DataQuality { get; set; }
     public string Status { get; set; }
     public Rating Rating { get; set; }
     public Contributor Submitter { get; set; }

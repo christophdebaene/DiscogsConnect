@@ -20,7 +20,6 @@ internal class UserCollectionClient : IUserCollectionClient
         => await _restClient.DeleteAsync($"users/{username}/collection/folders/{folderId}");
     public async Task<PaginationResponse<CollectionItem>> GetItemsByReleaseAsync(string username, int releaseId, int page = 1, int per_page = 100)
         => await _restClient.GetAsync<PaginationResponse<CollectionItem>>($"users/{username}/collection/releases/{releaseId}", new { page, per_page });
-
     public async Task<List<CollectionItem>> GetItemsByReleaseAllAsync(string username, int releaseId)
         => await _restClient.GetAllPagesAsync<CollectionItem>($"users/{username}/collection/releases/{releaseId}");
     public async Task<PaginationResponse<CollectionItem>> GetItemsByFolderAsync(string username, int folderId, int page = 1, int per_page = 100)
