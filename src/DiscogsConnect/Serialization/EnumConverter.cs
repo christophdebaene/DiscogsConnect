@@ -6,12 +6,12 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace DiscogsConnect.Serialization;
-internal class JsonStringEnumConverter<TEnum> : JsonConverter<TEnum> where TEnum : struct, Enum
+internal class EnumConverter<TEnum> : JsonConverter<TEnum> where TEnum : struct, Enum
 {
     private readonly Dictionary<TEnum, string> _enumToString = [];
     private readonly Dictionary<string, TEnum> _stringToEnum = [];
     private readonly Dictionary<int, TEnum> _numberToEnum = [];
-    public JsonStringEnumConverter()
+    public EnumConverter()
     {
         var type = typeof(TEnum);
         foreach (var value in Enum.GetValues<TEnum>())
