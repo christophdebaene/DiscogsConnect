@@ -18,7 +18,7 @@ jobs:
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: '6.0.x'
+        dotnet-version: '8.0.100'
     - name: Install dependencies
       run: dotnet restore
     - name: Build
@@ -27,3 +27,4 @@ jobs:
       run: dotnet test --no-restore --verbosity normal
       env:
         DISCOGS_TOKEN: ${{ secrets.DISCOGS_TOKEN }}
+        DISCOGS_USERNAME: ${{ secrets.DISCOGS_USERNAME }}
