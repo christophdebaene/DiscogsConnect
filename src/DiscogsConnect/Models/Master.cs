@@ -2,7 +2,6 @@
 using System.Text.Json.Serialization;
 
 namespace DiscogsConnect;
-
 public class Master : Resource
 {
     public string Title { get; set; }
@@ -30,7 +29,6 @@ public class Master : Resource
         public string Name { get; set; }
     }
 }
-
 public class MasterVersion : Resource
 {
     public string Title { get; set; }

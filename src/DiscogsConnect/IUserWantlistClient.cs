@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 
 namespace DiscogsConnect;
-
 public interface IUserWantlistClient
 {
     Task<PaginationResponse<Wants>> GetAsync(string username);

@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 
 namespace DiscogsConnect;
-
 public class Label : Resource
 {
     public string Name { get; set; }
@@ -19,7 +18,6 @@ public class Label : Resource
         public string Name { get; set; }
     }
 }
-
 public class LabelRelease : Resource
 {
     public string Status { get; set; }

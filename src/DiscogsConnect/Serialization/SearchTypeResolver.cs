@@ -33,5 +33,3 @@ internal class SearchTypeResolver : DefaultJsonTypeInfoResolver
         _ => throw new NotImplementedException()
     };
 }
-
-

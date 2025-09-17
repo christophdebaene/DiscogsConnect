@@ -2,7 +2,6 @@
 using System.Text.Json.Serialization;
 
 namespace DiscogsConnect;
-
 public class Artist : Resource
 {
     public string Name { get; set; }
@@ -24,7 +23,6 @@ public class Artist : Resource
         public string Name { get; set; }
     }
 }
-
 public class ArtistRelease : Resource
 {
     public string Thumb { get; set; }

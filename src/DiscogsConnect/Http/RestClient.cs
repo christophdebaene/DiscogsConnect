@@ -9,12 +9,9 @@ using System.Threading.Tasks;
 using DiscogsConnect.Serialization;
 
 namespace DiscogsConnect.Http;
-internal class RestClient : IRestClient
+internal class RestClient(HttpClient httpClient) : IRestClient
 {
-    private readonly HttpClient _httpClient;
-    public RestClient(HttpClient httpClient)
-        => _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
-
+    private readonly HttpClient _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
     public async Task<byte[]> GetByteArrayAsync(string path)
         => await _httpClient.GetByteArrayAsync(path);
     public async Task<TResult> SendAsync<TResult>(HttpMethod method, string path, object values, object content) where TResult : class

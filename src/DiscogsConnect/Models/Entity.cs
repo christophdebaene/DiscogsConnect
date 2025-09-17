@@ -1,5 +1,4 @@
 ﻿namespace DiscogsConnect;
-
 public class Entity : Resource
 {
     public string Name { get; set; }

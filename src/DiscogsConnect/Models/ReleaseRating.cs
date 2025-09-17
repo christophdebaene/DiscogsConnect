@@ -1,5 +1,4 @@
 ﻿namespace DiscogsConnect;
-
 public class ReleaseRating
 {
     public int ReleaseId { get; set; }

@@ -1,18 +1,15 @@
 ﻿using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
-
 using DiscogsConnect.Http;
 
 namespace DiscogsConnect;
-
 public class DiscogsOptions
 {
     public string UserAgent { get; set; }
     public string Token { get; set; }
     public Action<RateLimit> RateLimitAction { get; set; }
 }
-
 public class DiscogsClient : IDiscogsClient
 {
     public static readonly Uri DiscogsApiUrl = new("https://api.discogs.com");

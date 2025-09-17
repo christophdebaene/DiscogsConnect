@@ -8,14 +8,9 @@ using Xunit;
 namespace DiscogsConnect.Clients;
 
 [Collection("DiscogsClient")]
-public partial class DatabaseClientTests
+public partial class DatabaseClientTests(DiscogsClientFixture fixture)
 {
-    protected IDiscogsClient Client { get; }
-
-    public DatabaseClientTests(DiscogsClientFixture fixture)
-    {
-        Client = fixture.DiscogsClient;
-    }
+    protected IDiscogsClient Client { get; } = fixture.DiscogsClient;
 
     [Fact]
     public async Task GetArtistAsync()
@@ -38,7 +33,7 @@ public partial class DatabaseClientTests
 
         response.Realname.Should().Be("Richard David James");
         response.Profile.Should().Contain("18 August 1971");
-        response.Urls.Should().Contain("https://aphextwin.warp.net/", "https://en.wikipedia.org/wiki/Aphex_Twin");
+        response.Urls.Should().IntersectWith(["http://aphextwin.warp.net/", "http://en.wikipedia.org/wiki/Aphex_Twin"]);
         response.NameVariations.Should().Contain("Apex Twin", "Aphex Twins", "AphexTwin", "The Aphex Twin");
         response.Aliases.Should().NotBeEmpty();
 

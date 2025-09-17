@@ -1,5 +1,4 @@
 ﻿namespace DiscogsConnect;
-
 public class Image
 {
     public int Width { get; set; }

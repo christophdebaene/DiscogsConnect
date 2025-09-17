@@ -2,7 +2,6 @@
 using System.Text.Json.Serialization;
 
 namespace DiscogsConnect;
-
 public class Release : Resource
 {
     public string Title { get; set; }
@@ -39,7 +38,6 @@ public class Release : Resource
     public string Thumb { get; set; }
     public int MasterId { get; set; }
     public int EstimatedWeight { get; set; }
-
     public class Artist : Resource
     {
         public string Tracks { get; set; }
@@ -49,7 +47,6 @@ public class Release : Resource
         public string Name { get; set; }
         public string ThumbnailUrl { get; set; }
     }
-
     public class Identifier
     {
         public string Type { get; set; }

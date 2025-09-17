@@ -1,9 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Net.Http;
 
 namespace DiscogsConnect.Http;
-
 public class RateLimit
 {
     public int? Total { get; set; }
@@ -20,9 +18,9 @@ public class RateLimit
     }
     private static int? GetHeaderValueAsIntSafe(HttpResponseMessage response, string key)
     {
-        if (response.Headers.TryGetValues(key, out IEnumerable<string> values))
+        if (response.Headers.TryGetValues(key, out var values))
         {
-            if (int.TryParse(values.FirstOrDefault(), out int value))
+            if (int.TryParse(values.FirstOrDefault(), out var value))
                 return value;
         }
 

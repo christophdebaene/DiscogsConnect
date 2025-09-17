@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 
 namespace DiscogsConnect;
-
 public class Wants : Resource
 {
     public int Rating { get; set; }

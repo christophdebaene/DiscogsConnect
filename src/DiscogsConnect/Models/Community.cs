@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 
 namespace DiscogsConnect;
-
 public class Community
 {
     public int Have { get; set; }
@@ -23,7 +22,6 @@ public class Community
         }
     }
 }
-
 public class Rating
 {
     public int Count { get; set; }

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 
 namespace DiscogsConnect;
-
 public class Folder : Resource
 {
     public int Count { get; set; }
@@ -25,7 +24,6 @@ public class FieldCollection
 {
     public List<Field> Fields { get; set; }
 }
-
 public class Field
 {
     public string Name { get; set; }
@@ -34,14 +32,12 @@ public class Field
     public string Type { get; set; }
     public bool Public { get; set; }
 }
-
 public class CollectionValue
 {
     public string Maximum { get; set; }
     public string Median { get; set; }
     public string Minimum { get; set; }
 }
-
 public class CollectionItem
 {
     public int Id { get; set; }

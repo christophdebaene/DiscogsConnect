@@ -3,7 +3,6 @@ using System.Linq;
 using System.Text.Json.Serialization;
 
 namespace DiscogsConnect;
-
 public class Track
 {
     public string Duration { get; set; }
@@ -15,7 +14,6 @@ public class Track
 
     [JsonPropertyName("extraartists")]
     public List<Artist> ExtraArtists { get; set; }
-
     public List<Artist> Artists { get; set; }
 
     public string GetFormattedArtists() =>

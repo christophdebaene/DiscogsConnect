@@ -1,7 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
 namespace DiscogsConnect;
-
 public enum DataQuality
 {
     [EnumMember(Value = "Needs Vote")]

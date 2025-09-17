@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 
 namespace DiscogsConnect;
-
 public interface IUserCollectionClient
 {
     Task<FolderCollection> GetFoldersAsync(string username);

@@ -1,5 +1,4 @@
 ﻿namespace DiscogsConnect;
-
 public class Video
 {
     public string Uri { get; set; }

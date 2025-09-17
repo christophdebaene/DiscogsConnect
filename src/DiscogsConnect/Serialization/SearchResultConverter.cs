@@ -12,7 +12,7 @@ internal class SearchResultConverter : JsonConverter<SearchResult>
     }
     public override SearchResult Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
-        Utf8JsonReader readerClone = reader;
+        var readerClone = reader;
 
         if (readerClone.TokenType != JsonTokenType.StartObject)
         {

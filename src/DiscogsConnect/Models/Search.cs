@@ -28,7 +28,6 @@ public class ReleaseSearchResult : SearchResult
     public string Year { get; set; }
     public List<string> Genre { get; set; }
 }
-
 public class LabelSearchResult : SearchResult
 {
 }

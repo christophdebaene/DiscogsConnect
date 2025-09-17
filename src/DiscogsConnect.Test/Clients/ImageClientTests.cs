@@ -6,13 +6,9 @@ using Xunit;
 namespace DiscogsConnect.Clients;
 
 [Collection("DiscogsClient")]
-public class ImageClientTests
+public class ImageClientTests(DiscogsClientFixture fixture)
 {
-    protected IDiscogsClient Client { get; }
-    public ImageClientTests(DiscogsClientFixture fixture)
-    {
-        Client = fixture.DiscogsClient;
-    }
+    protected IDiscogsClient Client { get; } = fixture.DiscogsClient;
 
     [Fact]
     public async Task GetAsync()

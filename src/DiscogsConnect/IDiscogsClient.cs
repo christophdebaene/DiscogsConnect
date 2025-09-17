@@ -1,5 +1,4 @@
 ﻿namespace DiscogsConnect;
-
 public interface IDiscogsClient
 {
     IDatabaseClient Database { get; }

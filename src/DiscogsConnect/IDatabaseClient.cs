@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 
 namespace DiscogsConnect;
-
 public interface IDatabaseClient
 {
     Task<Release> GetReleaseAsync(int id, Currency currency = Currency.NONE);

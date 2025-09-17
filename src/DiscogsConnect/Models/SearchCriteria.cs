@@ -1,5 +1,4 @@
 ﻿namespace DiscogsConnect;
-
 public class SearchCriteria
 {
     public string Query { get; set; }

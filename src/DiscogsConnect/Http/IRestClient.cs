@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 
 namespace DiscogsConnect.Http;
-
 public interface IRestClient
 {
     Task<byte[]> GetByteArrayAsync(string path);

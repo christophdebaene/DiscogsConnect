@@ -1,14 +1,11 @@
 using System;
 using System.IO;
 using System.Linq;
-
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-
 using Xunit;
 
 namespace DiscogsConnect.Test;
-
 public class DiscogsClientFixture
 {
     public IDiscogsClient DiscogsClient { get; }
@@ -29,7 +26,6 @@ public static class DiscogsOptionsFactory
             UserAgent = UserAgent,
             Token = Environment.GetEnvironmentVariable("DISCOGS_TOKEN")
         };
-
     static DiscogsOptionsFactory()
     {
         var path = @"Properties\launchSettings.json";
