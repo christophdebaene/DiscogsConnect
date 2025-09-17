@@ -5,6 +5,7 @@
     <Copyright>Copyright Christoph De Baene</Copyright>
     <PackageProjectUrl>https://github.com/christophdebaene/DiscogsConnect</PackageProjectUrl>
     <PackageIcon>DiscogsConnect.png</PackageIcon>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/christophdebaene/DiscogsConnect</RepositoryUrl>   
     <RepositoryType>git</RepositoryType>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
@@ -17,6 +18,7 @@
 
   <ItemGroup>
     <None Include="..\..\logo\DiscogsConnect.png" Pack="true" PackagePath="" />
+    <None Include="..\..\README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
   
   <ItemGroup>
