@@ -3,7 +3,7 @@
 namespace DiscogsConnect.Serialization;
 internal static class JSerializer
 {
-    static readonly JsonSerializerOptions s_options = new JsonSerializerOptions
+    static readonly JsonSerializerOptions s_options = new()
     {
         PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower,
         Converters =

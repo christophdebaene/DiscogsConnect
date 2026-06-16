@@ -14,7 +14,7 @@ internal class RestClient(HttpClient httpClient) : IRestClient
     private readonly HttpClient _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
     public async Task<byte[]> GetByteArrayAsync(string path)
         => await _httpClient.GetByteArrayAsync(path);
-    public async Task<TResult> SendAsync<TResult>(HttpMethod method, string path, object values, object content) where TResult : class
+    public async Task<TResult> SendAsync<TResult>(HttpMethod method, string path, object values, object content)
     {
         using (var requestMessage = new HttpRequestMessage
         {
@@ -28,7 +28,7 @@ internal class RestClient(HttpClient httpClient) : IRestClient
             response.EnsureSuccessStatusCode();
 
             if (typeof(TResult) == typeof(Unit))
-                return Unit.Value as TResult;
+                return (TResult)(object)Unit.Value;
 
             var responseBody = await response.Content.ReadAsStringAsync();
             return JSerializer.Deserialize<TResult>(responseBody);

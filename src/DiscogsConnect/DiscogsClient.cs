@@ -7,8 +7,7 @@ namespace DiscogsConnect;
 public class DiscogsOptions
 {
     public string UserAgent { get; set; }
-    public string Token { get; set; }
-    public Action<RateLimit> RateLimitAction { get; set; }
+    public string Token { get; set; }    
 }
 public class DiscogsClient : IDiscogsClient
 {
@@ -18,6 +17,7 @@ public class DiscogsClient : IDiscogsClient
 
     public IDatabaseClient Database { get; }
     public IImageClient Image { get; }
+    public IUserIdentityClient UserIdentity { get;  }
     public IUserCollectionClient UserCollection { get; }
     public IUserWantlistClient UserWantlist { get; }
     public DiscogsClient(DiscogsOptions options) : this(options, new HttpClient())
@@ -34,6 +34,7 @@ public class DiscogsClient : IDiscogsClient
 
         Database = new DatabaseClient(_restClient);
         Image = new ImageClient(_restClient);
+        UserIdentity = new UserIdentityClient(_restClient);
         UserCollection = new UserCollectionClient(_restClient);
         UserWantlist = new UserWantlistClient(_restClient);
     }

@@ -3,7 +3,7 @@
 namespace DiscogsConnect;
 public enum DataQuality
 {
-    [EnumMember(Value = "Needs Vote")]
+    [EnumMember(Value = "Needs Vote")]    
     NeedsVote,
 
     [EnumMember(Value = "Correct")]

@@ -1,7 +1,7 @@
 ﻿using System;
 
 namespace DiscogsConnect;
-internal class Unit : IEquatable<Unit>, IComparable<Unit>, IComparable
+internal readonly struct Unit : IEquatable<Unit>, IComparable<Unit>, IComparable
 {
     public static readonly Unit Value = new();
     public int CompareTo(Unit other) => 0;

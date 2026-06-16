@@ -41,7 +41,7 @@ public class CollectionValue
 public class CollectionItem
 {
     public int Id { get; set; }
-    public int InstanceId { get; set; }
+    public long InstanceId { get; set; }
     public DateTime DateAdded { get; set; }
     public int FolderId { get; set; }
 
