@@ -11,8 +11,7 @@
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <Authors>Christoph De Baene</Authors>
     <Company />
-    <Description>DiscogsConnect is a .NET client library for accessing the REST API v2.0 of Discogs</Description>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Description>DiscogsConnect is a .NET client library for accessing the REST API v2.0 of Discogs</Description>    
     <MinVerTagPrefix>v</MinVerTagPrefix>
   </PropertyGroup>
 
