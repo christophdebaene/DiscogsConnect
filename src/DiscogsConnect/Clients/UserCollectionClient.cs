@@ -23,11 +23,11 @@ internal class UserCollectionClient(IRestClient restClient) : IUserCollectionCli
         => await restClient.GetAllPagesAsync<CollectionItem>($"users/{username}/collection/folders/{folderId}/releases");
     public async Task<AddToCollectionResponse> AddToFolderAsync(string username, int folderId, int releaseId)
         => await restClient.PostAsync<AddToCollectionResponse>($"users/{username}/collection/folders/{folderId}/releases/{releaseId}");
-    public async Task DeleteInstanceAsync(string username, int folderId, int releaseId, int instanceId)
+    public async Task DeleteInstanceAsync(string username, int folderId, int releaseId, long instanceId)
         => await restClient.DeleteAsync($"users/{username}/collection/folders/{folderId}/releases/{releaseId}/instances/{instanceId}");
     public async Task<FieldCollection> GetFieldsAsync(string username)
         => await restClient.GetAsync<FieldCollection>($"users/{username}/collection/fields");
-    public async Task EditFieldAsync(string username, int folderId, int releaseId, int instanceId, int fieldId, string value)
+    public async Task EditFieldAsync(string username, int folderId, int releaseId, long instanceId, int fieldId, string value)
         => await restClient.PostAsync($"users/{username}/collection/folders/{folderId}/releases/{releaseId}/instances/{instanceId}/fields/{fieldId}", null, new { value });
     public async Task<CollectionValue> GetValueAsync(string username)
         => await restClient.GetAsync<CollectionValue>($"users/{username}/collection/value");

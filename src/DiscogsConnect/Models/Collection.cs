@@ -16,7 +16,7 @@ public class FolderCollection
 }
 public class AddToCollectionResponse
 {
-    public int InstanceId { get; set; }
+    public long InstanceId { get; set; }
     public string ResourceUrl { get; set; }
 }
 

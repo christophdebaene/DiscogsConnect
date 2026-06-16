@@ -13,8 +13,8 @@ public interface IUserCollectionClient
     Task<PaginationResponse<CollectionItem>> GetItemsByFolderAsync(string username, int folderId, int page = 1, int perPage = 100);
     Task<List<CollectionItem>> GetItemsByFolderAllAsync(string username, int folderId);
     Task<AddToCollectionResponse> AddToFolderAsync(string username, int folderId, int releaseId);
-    Task DeleteInstanceAsync(string username, int folderId, int releaseId, int instanceId);
+    Task DeleteInstanceAsync(string username, int folderId, int releaseId, long instanceId);
     Task<FieldCollection> GetFieldsAsync(string username);
-    Task EditFieldAsync(string username, int folderId, int releaseId, int instanceId, int fieldId, string value);
+    Task EditFieldAsync(string username, int folderId, int releaseId, long instanceId, int fieldId, string value);
     Task<CollectionValue> GetValueAsync(string username);
 }
