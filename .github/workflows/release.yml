@@ -3,7 +3,7 @@ name: Release
 on:
   push:
     tags:
-    - '*.*.*'
+    - 'v*.*.*'
   
 jobs:
   build:
@@ -18,23 +18,25 @@ jobs:
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: '8.0.100'
-    - name: Install dependencies
-      run: dotnet restore
+        dotnet-version: '8.0.x'
+    - name: Restore
+      run: dotnet restore      
     - name: Build
-      run: dotnet build --configuration Release --no-restore
+      run: dotnet build --configuration Release --no-restore      
     - name: Test
-      run: dotnet test --no-restore --verbosity normal
+      run: dotnet test --configuration Release --no-build --verbosity normal
       env:
         DISCOGS_TOKEN: ${{ secrets.DISCOGS_TOKEN }}
         DISCOGS_USERNAME: ${{ secrets.DISCOGS_USERNAME }}
-    - name: NuGet login (OIDC → temp API key)
+    - name: Pack
+      run: dotnet pack src/DiscogsConnect/DiscogsConnect.csproj --configuration Release --no-build -o artifacts
+    - name: NuGet login (OIDC)
       uses: NuGet/login@v1
       id: login
       with:
         user: ${{ secrets.NUGET_USER }}    
     - name: NuGet push
-      run: dotnet nuget push **/*.nupkg 
+      run: dotnet nuget push "artifacts/*.nupkg" 
                --api-key ${{steps.login.outputs.NUGET_API_KEY}}
                --source https://api.nuget.org/v3/index.json
                --skip-duplicate
